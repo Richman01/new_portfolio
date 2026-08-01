@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
-import { PlaceholderBlock } from "@/components/shared/PlaceholderBlock";
+import { HeroAvatar } from "@/components/hero/HeroAvatar";
 import { SocialIcon } from "@/components/shared/SocialIcon";
 import { site } from "@/data/site";
 import { socials } from "@/data/socials";
@@ -42,13 +42,8 @@ export function AboutMePanel() {
     <section className="rounded-2xl border border-border bg-surface p-6 sm:p-7">
       <p className="text-xs font-medium tracking-wide text-muted uppercase">About me</p>
 
-      <div className="mt-4 h-20 w-20 overflow-hidden">
-        <PlaceholderBlock
-          sizeVariant="hero-avatar"
-          alt={`${site.name} portrait`}
-          label={site.shortName}
-          color="#8a8a8f"
-        />
+      <div className="mt-4">
+        <HeroAvatar sizeClassName="h-20 w-20" />
       </div>
 
       <h1 className="mt-4 text-xl font-semibold tracking-tight">{site.name}</h1>

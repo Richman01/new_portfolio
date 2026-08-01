@@ -6,6 +6,7 @@ export const socials: SocialLink[] = [
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/feranmi-ladapo/",
     color: "#0A66C2",
+    icon: "/logos/Linkedin.png",
     available: true,
   },
   {
@@ -20,6 +21,7 @@ export const socials: SocialLink[] = [
     label: "Email",
     href: "mailto:ladapoferanmi@gmail.com",
     color: "#374151",
+    icon: "/logos/Email.png",
     available: true,
   },
   {

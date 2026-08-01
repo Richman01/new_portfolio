@@ -1,27 +1,65 @@
 import type { ProjectMeta } from "@/lib/types";
 
-function galleryOf(slug: string, count: number) {
-  return Array.from({ length: count }, (_, i) => ({
-    alt: `${slug} project visual ${i + 1}`,
-    label: `Visual ${i + 1}`,
-  }));
-}
-
 export const projects: ProjectMeta[] = [
   {
     slug: "myscu",
     title: "MySCU",
-    role: "Brand and Product design",
-    date: "Jun '24",
+    role: "Founding Product Designer",
+    date: "Jun '25 — Present",
     status: "live",
     category: "featured",
     color: "#5B6EF5",
     dockLabel: "MySCU",
+    icon: "/logos/Myscu.png",
     summary:
-      "As Founding Product Designer at MySCU, I lead brand and product design for an AI platform guiding teenagers to top universities via personalized scholarships.",
-    sections: [
-      { type: "text", heading: "Overview", body: "As Founding Product Designer at MySCU, I lead brand and product design for an AI platform guiding teenagers to top universities via personalized scholarships." },
-      { type: "image-grid", heading: "Selected screens", images: galleryOf("myscu", 4) },
+      "As Founding Product Designer at MySCU, I've shaped the full product — landing page to platform — designing flows for students, counsellors, parents, and institutions, through multiple review and redesign cycles. MySCU pairs every family with a certified Counsellor and Mavi, an AI advisor, to plan, apply, and get visa-ready. The platform has helped 6,000+ students and secured $65M+ in scholarships.",
+    gallery: [
+      { src: "/images/myscu/landing-hero.png", alt: "MySCU landing page hero section", width: 1889, height: 1870 },
+      {
+        videoSrc: "/images/myscu/hero-section.mp4",
+        alt: "MySCU landing page hero animation",
+        width: 1440,
+        height: 888,
+      },
+      {
+        src: "/images/myscu/landing-scholarships.png",
+        alt: "MySCU scholarships and counsellor process section",
+        width: 1889,
+        height: 3204,
+      },
+      { src: "/images/myscu/landing-steps.png", alt: "MySCU eight-step journey section", width: 1889, height: 1868 },
+      {
+        src: "/images/myscu/student-dashboard.png",
+        alt: "Student dashboard onboarding view",
+        width: 1440,
+        height: 1073,
+      },
+      { src: "/images/myscu/counsellor-queue.png", alt: "Counsellor active students queue", width: 1440, height: 1073 },
+      {
+        src: "/images/myscu/counsellor-student-detail.png",
+        alt: "Counsellor viewing a student's detail page",
+        width: 1440,
+        height: 1073,
+      },
+      {
+        src: "/images/myscu/counsellor-profile.png",
+        alt: "Counsellor verification and credentials profile",
+        width: 1440,
+        height: 1078,
+      },
+      { src: "/images/myscu/mavi-chat.png", alt: "Mavi AI advisor chat interface", width: 1440, height: 1073 },
+      {
+        src: "/images/myscu/placement-wall-of-love.png",
+        alt: "Wall of love student result cards",
+        width: 1889,
+        height: 1305,
+      },
+      {
+        src: "/images/myscu/placement-case-file.png",
+        alt: "Case file student success story",
+        width: 1889,
+        height: 1065,
+      },
     ],
   },
   {
@@ -33,27 +71,10 @@ export const projects: ProjectMeta[] = [
     category: "featured",
     color: "#2AA876",
     dockLabel: "Sysserve",
+    icon: "/logos/Sysserve.png",
     summary:
       "Sysserve's old website struggled with poor usability and brand inconsistency, leading to low engagement and missed conversion opportunities.",
-    sections: [
-      { type: "text", heading: "Overview", body: "Sysserve's old website struggled with poor usability and brand inconsistency, leading to low engagement and missed conversion opportunities." },
-      { type: "image-grid", heading: "Selected screens", images: galleryOf("sysserve", 4) },
-    ],
-  },
-  {
-    slug: "fembol",
-    title: "Fembol",
-    role: "Website Redesign",
-    date: "May '23",
-    status: "live",
-    category: "featured",
-    color: "#E0663F",
-    dockLabel: "Fembol",
-    summary: "Fembol is a logistics platform offering streamlined and efficient supply chain solutions.",
-    sections: [
-      { type: "text", heading: "Overview", body: "Fembol is a logistics platform offering streamlined and efficient supply chain solutions." },
-      { type: "image-grid", heading: "Selected screens", images: galleryOf("fembol", 4) },
-    ],
+    gallery: [{ src: "/images/sysserve/banner.png", alt: "Sysserve website preview", width: 1298, height: 861 }],
   },
   {
     slug: "babyboom",
@@ -64,12 +85,8 @@ export const projects: ProjectMeta[] = [
     category: "featured",
     color: "#D65A9A",
     dockLabel: "Babyboom",
-    summary:
-      "Baby Boom Africa is a B2B e-commerce company specializing in maternity care and child merchandise.",
-    sections: [
-      { type: "text", heading: "Overview", body: "Baby Boom Africa is a B2B e-commerce company specializing in maternity care and child merchandise." },
-      { type: "image-grid", heading: "Selected screens", images: galleryOf("babyboom", 4) },
-    ],
+    summary: "Baby Boom Africa is a B2B e-commerce company specializing in maternity care and child merchandise.",
+    gallery: [{ src: "/images/babyboom/banner.png", alt: "Babyboom preview", width: 2000, height: 1499 }],
   },
   {
     slug: "homeland",
@@ -80,12 +97,10 @@ export const projects: ProjectMeta[] = [
     category: "brand-graphic",
     color: "#3E9DBF",
     dockLabel: "Homeland",
+    icon: "/logos/Homeland.png",
     summary:
       "I was responsible for the brand design and the creation of digital assets for website updates and layout enhancements.",
-    sections: [
-      { type: "text", heading: "Overview", body: "I was responsible for the brand design and the creation of digital assets for website updates and layout enhancements." },
-      { type: "image-grid", heading: "Brand assets", images: galleryOf("homeland", 4) },
-    ],
+    gallery: [{ src: "/images/homeland/banner.png", alt: "Homeland brand preview", width: 1714, height: 1084 }],
   },
   {
     slug: "giftender",
@@ -96,11 +111,9 @@ export const projects: ProjectMeta[] = [
     category: "brand-graphic",
     color: "#C9973A",
     dockLabel: "Giftender",
+    icon: "/logos/Giftender.png",
     summary: "Brand identity design for Giftender.",
-    sections: [
-      { type: "text", heading: "Overview", body: "Brand identity design for Giftender." },
-      { type: "image-grid", heading: "Brand assets", images: galleryOf("giftender", 4) },
-    ],
+    gallery: [{ src: "/images/giftender/banner.png", alt: "Giftender brand preview", width: 718, height: 472 }],
   },
   {
     slug: "jalpha-ehr",
@@ -111,11 +124,9 @@ export const projects: ProjectMeta[] = [
     category: "brand-graphic",
     color: "#6C6FD1",
     dockLabel: "Jalpha EHR",
+    icon: "/logos/Jalpha-Health.png",
     summary: "Online campaign design for Jalpha EHR.",
-    sections: [
-      { type: "text", heading: "Overview", body: "Online campaign design for Jalpha EHR." },
-      { type: "image-grid", heading: "Campaign visuals", images: galleryOf("jalpha-ehr", 4) },
-    ],
+    gallery: [{ src: "/images/jalpha-ehr/banner.png", alt: "Jalpha EHR campaign preview", width: 1920, height: 1349 }],
   },
   {
     slug: "venhoot",
@@ -126,11 +137,9 @@ export const projects: ProjectMeta[] = [
     category: "brand-graphic",
     color: "#4FA35A",
     dockLabel: "Venhoot",
+    icon: "/logos/Venhoot.png",
     summary: "Brand identity design for Venhoot.",
-    sections: [
-      { type: "text", heading: "Overview", body: "Brand identity design for Venhoot." },
-      { type: "image-grid", heading: "Brand assets", images: galleryOf("venhoot", 4) },
-    ],
+    gallery: [{ src: "/images/venhoot/banner.gif", alt: "Venhoot brand preview", width: 1152, height: 648 }],
   },
 ];
 

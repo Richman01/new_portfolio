@@ -3,11 +3,7 @@ export const site = {
   shortName: "Benji",
   location: "Lagos, Nigeria",
   title: "Product & Brand Product Designer",
-  headline: {
-    line1: "Product design",
-    icon: true,
-    line2: "& brand direction",
-  },
+  headline: "I design products and brands people actually enjoy using.",
   bio: "I craft digital interfaces that unite brand identity with functional utility, making the web more beautiful, navigable, and purposeful for the people it serves.",
   footerLine: "This website uses no cookies and no tracking. Like the web should be ❤️",
 };

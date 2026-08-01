@@ -3,16 +3,12 @@ export type ProjectStatus = "live" | "archived" | "coming-soon";
 
 export interface MediaItem {
   src?: string;
+  videoSrc?: string;
   alt: string;
-  label: string;
+  label?: string;
+  width: number;
+  height: number;
 }
-
-export type CaseStudySection =
-  | { type: "text"; heading?: string; body: string }
-  | { type: "image-grid"; heading?: string; images: MediaItem[] }
-  | { type: "carousel"; heading?: string; slides: MediaItem[] }
-  | { type: "video"; heading?: string; videoSrc?: string; poster?: string }
-  | { type: "featured-logos"; heading?: string; logos: { name: string; href?: string }[] };
 
 export interface ProjectMeta {
   slug: string;
@@ -24,10 +20,8 @@ export interface ProjectMeta {
   summary: string;
   color: string;
   dockLabel: string;
-  bannerImage?: string;
-  madeBy?: { label: string; href: string };
-  featuredLogos?: { name: string; href?: string }[];
-  sections: CaseStudySection[];
+  icon?: string;
+  gallery: MediaItem[];
 }
 
 export type SocialKind = "linkedin" | "dribbble" | "email" | "behance" | "resume";
@@ -37,5 +31,24 @@ export interface SocialLink {
   label: string;
   href: string | null;
   color: string;
+  icon?: string;
   available: boolean;
+}
+
+export interface AboutStat {
+  label: string;
+  value: string;
+}
+
+export interface CareerRole {
+  title: string;
+  dateRange: string;
+  location?: string;
+  bullets?: string[];
+}
+
+export interface CareerEntry {
+  company: string;
+  totalDuration?: string;
+  roles: CareerRole[];
 }

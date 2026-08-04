@@ -52,7 +52,6 @@ export function ImageLightbox() {
             aria-modal="true"
             aria-label={activeItem.label}
             tabIndex={-1}
-            onClick={(e) => e.stopPropagation()}
             className="flex w-full flex-1 flex-col items-center justify-center outline-none"
           >
             <motion.div
@@ -61,6 +60,7 @@ export function ImageLightbox() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.18 }}
+              onClick={(e) => e.stopPropagation()}
               className="relative h-[70vh] w-[90vw] sm:h-[78vh] sm:w-[85vw]"
             >
               {activeItem.src && (

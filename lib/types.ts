@@ -25,6 +25,19 @@ export interface CaseStudySection {
   media?: MediaItem | MediaItem[];
 }
 
+export interface Achievement {
+  slug: string;
+  title: string;
+  summary: string;
+  role: string;
+  date: string;
+  liveUrl?: string;
+  cardImage: MediaItem;
+  cover?: MediaItem;
+  intro: { body: string[]; quote?: string };
+  sections: CaseStudySection[];
+}
+
 export type CaseStudyLayout =
   | {
       kind: "gallery";
@@ -35,8 +48,9 @@ export type CaseStudyLayout =
   | {
       kind: "numbered";
       cover: MediaItem;
-      intro: { body: string[]; quote?: string };
+      intro: { lede?: string; body: string[]; quote?: string; stats?: StatItem[] };
       sections: CaseStudySection[];
+      achievements?: Achievement[];
     }
   | {
       kind: "split";

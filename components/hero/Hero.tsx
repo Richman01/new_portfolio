@@ -1,6 +1,5 @@
 import { Averia_Serif_Libre } from "next/font/google";
 import { HeroAvatar } from "@/components/hero/HeroAvatar";
-import { StatsRow } from "@/components/hero/StatsRow";
 import { site } from "@/data/site";
 import { cn } from "@/lib/cn";
 
@@ -14,7 +13,7 @@ export function Hero() {
     <section className="flex flex-col items-center px-4 pt-24 pb-8 text-center sm:px-6 sm:pt-32 sm:pb-10">
       <HeroAvatar />
 
-      <p className="mt-4 text-sm text-muted">{site.name}</p>
+      <p className="mt-4 text-base font-medium text-muted">{site.name}</p>
 
       <h1
         className={cn(
@@ -24,8 +23,6 @@ export function Hero() {
       >
         {site.headline}
       </h1>
-
-      <StatsRow />
     </section>
   );
 }

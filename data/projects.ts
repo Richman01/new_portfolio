@@ -68,64 +68,291 @@ export const projects: ProjectMeta[] = [
   {
     slug: "sysserve",
     title: "Sysserve",
-    role: "UI/UX Designer",
-    date: "Jan '25",
+    role: "Product Designer",
+    date: "Feb '24 — Present",
     status: "live",
     category: "featured",
-    color: "#2AA876",
+    color: "#0098FF",
     dockLabel: "Sysserve",
     icon: "/logos/Sysserve.png",
     liveUrl: "https://sysservesolutions.com/",
     caseStudy: {
       kind: "numbered",
-      cover: { src: "/images/sysserve/cover.png", alt: "Sysserve redesigned website", width: 1298, height: 861 },
+      cover: { src: "/images/sysserve/cover.png", alt: "Sysserve website", width: 2880, height: 1650 },
       intro: {
+        lede:
+          "Enterprise fleet & asset software — and the place I grew from intern to the only product designer on the team.",
         body: [
-          "Sysserve is a technology consulting firm that builds bespoke digital solutions for businesses. Their previous website no longer reflected the company's modern capabilities or innovative approach.",
-          "My role was a complete overhaul of the website's user experience and visual identity, bringing it in line with Sysserve's brand values and business goals.",
+          "Sysserve builds Instanta, an enterprise platform spanning Fleet, Facility, Asset & Inventory, Workplace, Telematics, and Property management. I joined in February 2024 as a Product Design Intern and was promoted to Product Designer six months later, owning design end-to-end with no other designer to hand off to.",
         ],
-        quote: "We needed a digital presence that matched our technical expertise and market ambition.",
+        stats: [
+          { value: "6 months", label: "Intern to Product Designer" },
+          { value: "1 of 1", label: "Only designer on the team" },
+          { value: "6", label: "Instanta modules" },
+        ],
       },
-      sections: [
+      sections: [],
+      achievements: [
         {
-          heading: "The Problem (Old Design)",
-          body: [
-            "Users struggled to find service information, and the visual design felt dated next to competitors — the result was a high bounce rate and weak lead generation.",
+          slug: "website-redesign",
+          title: "Website Redesign & Complete Overhaul",
+          summary:
+            "A ground-up UX and visual identity overhaul of Sysserve's public website — from a dated, high-bounce-rate site to a modern, conversion-focused presence.",
+          role: "UI/UX Designer",
+          date: "Jan '25",
+          liveUrl: "https://sysservesolutions.com/",
+          cardImage: {
+            src: "/images/sysserve/cover.png",
+            alt: "Sysserve redesigned website",
+            width: 2880,
+            height: 1650,
+          },
+          cover: { src: "/images/sysserve/cover.png", alt: "Sysserve redesigned website", width: 2880, height: 1650 },
+          intro: {
+            body: [
+              "Sysserve's previous website no longer reflected the company's modern capabilities or innovative approach. My role was a complete overhaul of the website's user experience and visual identity, bringing it in line with Sysserve's brand values and business goals.",
+            ],
+            quote: "We needed a digital presence that matched our technical expertise and market ambition.",
+          },
+          sections: [
+            {
+              heading: "The Problem (Old Design)",
+              body: [
+                "Users struggled to find service information, and the visual design felt dated next to competitors — the result was a high bounce rate and weak lead generation.",
+              ],
+              stat: { value: "65%", label: "bounce rate on key service pages, driven by poor navigation" },
+              media: { src: "/images/sysserve/1.png", alt: "Sysserve old design", width: 1399, height: 1299 },
+            },
+            {
+              heading: "Research & Insights",
+              body: [
+                "I carried out extensive design explorations, analyzing competitors such as Salesforce and Fleetio — studying their layouts, site structures, and product listings to understand what made their approaches work.",
+                "Throughout the process I collaborated closely with stakeholders, the marketing team, and developers across multiple rounds of feedback and review. Those iterations are what shaped the final design.",
+              ],
+              media: [
+                { src: "/images/sysserve/2.png", alt: "Sysserve design exploration", width: 1394, height: 1306 },
+                { src: "/images/sysserve/3.png", alt: "Sysserve design exploration", width: 1391, height: 1207 },
+              ],
+            },
+            {
+              heading: "Mobile Breakpoint",
+              body: ["Every page was rebuilt to work as comfortably on a phone as on a desktop."],
+              media: [
+                { src: "/images/sysserve/4.png", alt: "Sysserve mobile breakpoint", width: 1399, height: 1307 },
+                { src: "/images/sysserve/5.png", alt: "Sysserve mobile breakpoint", width: 1600, height: 1128 },
+              ],
+            },
+            {
+              heading: "Design Solution",
+              body: [
+                "The new design pairs a clean, modern aesthetic with a focus on readability and accessibility. A streamlined navigation system and prominent calls to action now guide visitors through the sales funnel.",
+              ],
+              bullets: [
+                "Simplified Information Architecture",
+                "Modern Visual Identity System",
+                "Responsive & Accessible Layouts",
+              ],
+              media: { src: "/images/sysserve/6.png", alt: "Sysserve final design", width: 1600, height: 1625 },
+            },
+            {
+              heading: "Final Thoughts",
+              body: [
+                "The redesign has significantly improved engagement and lead capture — the client reports a noticeable increase in inquiries, along with positive feedback from stakeholders.",
+              ],
+            },
           ],
-          stat: { value: "65%", label: "bounce rate on key service pages, driven by poor navigation" },
-          media: { src: "/images/sysserve/1.png", alt: "Sysserve old design", width: 1399, height: 1299 },
         },
         {
-          heading: "Research & Insights",
-          body: [
-            "I carried out extensive design explorations, analyzing competitors such as Salesforce and Fleetio — studying their layouts, site structures, and product listings to understand what made their approaches work.",
-            "Throughout the process I collaborated closely with stakeholders, the marketing team, and developers across multiple rounds of feedback and review. Those iterations are what shaped the final design.",
-          ],
-          media: [
-            { src: "/images/sysserve/2.png", alt: "Sysserve design exploration", width: 1394, height: 1306 },
-            { src: "/images/sysserve/3.png", alt: "Sysserve design exploration", width: 1391, height: 1207 },
-          ],
-        },
-        {
-          heading: "Mobile Breakpoint",
-          body: ["Every page was rebuilt to work as comfortably on a phone as on a desktop."],
-          media: [
-            { src: "/images/sysserve/4.png", alt: "Sysserve mobile breakpoint", width: 1399, height: 1307 },
-            { src: "/images/sysserve/5.png", alt: "Sysserve mobile breakpoint", width: 1600, height: 1128 },
-          ],
-        },
-        {
-          heading: "Design Solution",
-          body: [
-            "The new design pairs a clean, modern aesthetic with a focus on readability and accessibility. A streamlined navigation system and prominent calls to action now guide visitors through the sales funnel.",
-          ],
-          bullets: ["Simplified Information Architecture", "Modern Visual Identity System", "Responsive & Accessible Layouts"],
-          media: { src: "/images/sysserve/6.png", alt: "Sysserve final design", width: 1600, height: 1625 },
-        },
-        {
-          heading: "Final Thoughts",
-          body: [
-            "The redesign has significantly improved engagement and lead capture — the client reports a noticeable increase in inquiries, along with positive feedback from stakeholders.",
+          slug: "tyre-management",
+          title: "Tyre Management",
+          summary:
+            "A full tyre lifecycle module for Instanta Fleet — register, install, track, and retire tyres across any axle configuration, from a standard 4×2 to a 10×4 twin-steer rig.",
+          role: "Product Designer — solo, full UX/UI ownership",
+          date: "2026",
+          cardImage: {
+            src: "/images/sysserve/tyre-management/truck-tyre.jpg",
+            alt: "Close-up of a heavy-duty truck tyre",
+            width: 1600,
+            height: 1200,
+          },
+          intro: {
+            body: [
+              "Fleet operators were tracking tyre stock, installs, and replacement schedules manually — across spreadsheets and paper logs disconnected from the vehicles they belonged to. That made it hard to know which tyre was on which wheel, when it needed replacing, or how much was being spent on rubber across a fleet.",
+              "As the sole designer on this, I owned the module end-to-end inside Instanta Fleet: vehicle groups as the foundation, a tyre register as the single source of truth, an installation flow built around a real axle-position picker, and automated replacement-cycle tracking — covering every axle configuration Sysserve's fleet customers actually run.",
+            ],
+          },
+          sections: [
+            {
+              heading: "Vehicle Groups, the Foundation",
+              body: [
+                "Every tyre install starts from a vehicle group — its category, make, model, and crucially its tyre specification and axle configuration. This is what lets the rest of the module work off real vehicle data instead of free text: once a group's axle configuration is set, every install for that group renders the correct wheel diagram automatically.",
+                "Battery specification, KM per litre, and salvage value all live on the same group record, since tyre cost and vehicle depreciation are part of the same fleet-economics picture for the ops team.",
+              ],
+              media: [
+                {
+                  src: "/images/sysserve/tyre-management/vehicle-groups.png",
+                  alt: "Vehicle groups table with tyre and battery specifications",
+                  width: 1920,
+                  height: 1200,
+                },
+                {
+                  src: "/images/sysserve/tyre-management/new-vehicle-group.png",
+                  alt: "New vehicle group form with axle configuration and pricing sections",
+                  width: 1537,
+                  height: 1200,
+                },
+              ],
+            },
+            {
+              heading: "Tyre Register",
+              body: [
+                "Every tyre in the warehouse is logged against its manufacturer, part and serial number, size (width, aspect ratio, rim diameter), construction, cost, and current location — with a running count and total spend at the bottom of the ledger. This register is the source of truth every other screen in the module reads from.",
+                "New stock enters the same way: a short intake form captures type, manufacturer, mileage, salvage value, and which warehouse it's stored in, before it ever reaches a vehicle.",
+              ],
+              media: [
+                {
+                  src: "/images/sysserve/tyre-management/register.png",
+                  alt: "Tyre register table with full tyre inventory",
+                  width: 1920,
+                  height: 1200,
+                },
+                {
+                  src: "/images/sysserve/tyre-management/new-tyre-form.png",
+                  alt: "New tyre intake form for warehouse stock",
+                  width: 1152,
+                  height: 810,
+                },
+              ],
+            },
+            {
+              heading: "Defining Axle Configurations",
+              body: [
+                "Before a wheel picker can render a real vehicle, someone has to define what that vehicle's axles actually look like. I designed the configuration builder as its own small tool — pick a base layout (4-axle, 8x4 tandem, and so on), choose the specific variant, and the position grid populates for that vehicle group to reuse on every future install.",
+                "Nine configurations cover Sysserve's fleet customers end to end, from a two-axle delivery van to a ten-wheel twin-steer rig.",
+              ],
+              bullets: ["4×2, 4×4, 6×2, 6×4, 6×6", "8×2, 8×4SS, 8×4TS", "10×4 Twin Steer"],
+              media: [
+                {
+                  src: "/images/sysserve/tyre-management/new-axle-configuration.png",
+                  alt: "New axle configuration builder showing a 6x4 layout",
+                  width: 1536,
+                  height: 1175,
+                },
+                {
+                  src: "/images/sysserve/tyre-management/axle-4x2.png",
+                  alt: "4x2 axle configuration diagram",
+                  width: 820,
+                  height: 379,
+                },
+              ],
+            },
+            {
+              heading: "Installing a Tyre",
+              body: [
+                "Fitting a tyre means picking the exact wheel it goes on — not just an axle, but a side and position on that axle. Every open position on the vehicle's diagram renders as a dashed placeholder; selecting one fills it in and highlights it, next to the standard mileage, tread depth, and pressure fields.",
+              ],
+              media: [
+                {
+                  src: "/images/sysserve/tyre-management/add-tyre.png",
+                  alt: "Add tyre modal with axle position diagram",
+                  width: 1152,
+                  height: 767,
+                },
+                {
+                  src: "/images/sysserve/tyre-management/add-tyre-position-detail.png",
+                  alt: "Close-up of the axle position picker with one position selected",
+                  width: 1152,
+                  height: 767,
+                },
+              ],
+            },
+            {
+              heading: "Replacing, Storing & Disposing",
+              body: [
+                "Swapping a worn tyre carries the same flow one step further: the outgoing tyre can be sent back to the warehouse to Store, or marked Dispose if it's no longer usable — keeping the register accurate without a separate stock-adjustment screen.",
+              ],
+              media: [
+                {
+                  src: "/images/sysserve/tyre-management/add-tyre-store.png",
+                  alt: "Replacing a tyre with the store action",
+                  width: 1152,
+                  height: 767,
+                },
+                {
+                  src: "/images/sysserve/tyre-management/add-tyre-dispose.png",
+                  alt: "Replacing a tyre with the dispose action",
+                  width: 1152,
+                  height: 767,
+                },
+              ],
+            },
+            {
+              heading: "Tyre Type Reference & Restock Thresholds",
+              body: [
+                "A Tyre Type reference table keeps the catalog of approved tyre specs (manufacturer, size, construction, status) that the register and installation flow both draw from, so field staff pick from a maintained list instead of typing specs by hand.",
+                "Adding a new type also sets reorder, minimum, and maximum stock levels per warehouse — so the team gets a low-stock signal before a depot actually runs out of a given tyre.",
+              ],
+              media: [
+                {
+                  src: "/images/sysserve/tyre-management/tyre-type.png",
+                  alt: "Tyre type reference table",
+                  width: 1920,
+                  height: 1200,
+                },
+                {
+                  src: "/images/sysserve/tyre-management/new-tyre-type.png",
+                  alt: "New tyre type form with per-warehouse reorder levels",
+                  width: 1152,
+                  height: 1001,
+                },
+              ],
+            },
+            {
+              heading: "Replacement Cycles & Notifications",
+              body: [
+                "Replacement isn't just reactive — a cycle can be scheduled by time period or by mileage, tied to a specific tyre type, with approval and email notifications configured up front so the right person is looped in automatically when a cycle comes due.",
+              ],
+              media: [
+                {
+                  src: "/images/sysserve/tyre-management/replacement-cycle.png",
+                  alt: "Replacement cycle table with tyre types and notified users",
+                  width: 1920,
+                  height: 1200,
+                },
+                {
+                  src: "/images/sysserve/tyre-management/new-replacement-cycle.png",
+                  alt: "New replacement cycle form with approval and notification settings",
+                  width: 1229,
+                  height: 1200,
+                },
+              ],
+            },
+            {
+              heading: "Approvals in the Loop",
+              body: [
+                "Every installation submitted goes through an approval queue — submitted by, vehicle, mileage, and the tyres and positions involved are all visible before it's approved, with attachments flagged inline. Once approved, the read-only view shows the tyre tied directly to its vehicle and exact axle position.",
+              ],
+              media: [
+                {
+                  src: "/images/sysserve/tyre-management/installations.png",
+                  alt: "Tyre installation submissions pending approval",
+                  width: 1920,
+                  height: 1200,
+                },
+                {
+                  src: "/images/sysserve/tyre-management/view-tyre.png",
+                  alt: "Read-only tyre detail view showing assigned vehicle and position",
+                  width: 1152,
+                  height: 810,
+                },
+              ],
+            },
+            {
+              heading: "Final Thoughts",
+              body: [
+                "This was the first module I designed without another designer to review against — every call on the axle picker, the register schema, and the approval flow was mine to make and defend. It's also the project that taught me the most: how much a picture of a real vehicle can do for a form that used to be four dropdowns.",
+              ],
+            },
           ],
         },
       ],

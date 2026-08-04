@@ -1,5 +1,5 @@
 export const site = {
-  name: "Ladapo Benjamin",
+  name: "Ladapo Feranmi Benjamin",
   shortName: "Benji",
   location: "Lagos, Nigeria",
   title: "Product & Brand Product Designer",

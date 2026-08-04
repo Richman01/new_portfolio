@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Maximize2 } from "lucide-react";
 import { useLightbox } from "@/lib/LightboxContext";
 import type { MediaItem } from "@/lib/types";
 
@@ -38,11 +37,6 @@ export function ScreenMoment({ item }: { item: MediaItem }) {
         className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.01]"
         sizes="(min-width: 1024px) 720px, 100vw"
       />
-      <span className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-200 group-hover:bg-black/10 group-hover:opacity-100">
-        <span className="rounded-full bg-black/50 p-2.5">
-          <Maximize2 className="text-white" size={18} />
-        </span>
-      </span>
     </button>
   );
 }

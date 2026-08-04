@@ -16,10 +16,12 @@ export function CaseStudyWindow() {
   const project = activeSlug ? projects.find((p) => p.slug === activeSlug) : null;
 
   const windowRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [isMaximized, setIsMaximized] = useState(false);
   const [exitMode, setExitMode] = useState<ExitMode>("close");
   const [exitTarget, setExitTarget] = useState({ x: 0, y: 0 });
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [isAchievementOpen, setIsAchievementOpen] = useState(false);
 
   const [prevSlug, setPrevSlug] = useState(activeSlug);
   if (activeSlug !== prevSlug) {
@@ -33,12 +35,12 @@ export function CaseStudyWindow() {
   useEffect(() => {
     if (!project) return;
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape" && !isLightboxOpen) handleClose();
+      if (e.key === "Escape" && !isLightboxOpen && !isAchievementOpen) handleClose();
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [project, isLightboxOpen]);
+  }, [project, isLightboxOpen, isAchievementOpen]);
 
   function handleClose() {
     setExitMode("close");
@@ -133,8 +135,13 @@ export function CaseStudyWindow() {
               <div className="w-[52px] shrink-0" aria-hidden />
             </div>
 
-            <div className="flex-1 overflow-y-auto">
-              <CaseStudyContent project={project} onLightboxOpenChange={setIsLightboxOpen} />
+            <div ref={scrollRef} className="flex-1 overflow-y-auto">
+              <CaseStudyContent
+                project={project}
+                onLightboxOpenChange={setIsLightboxOpen}
+                onAchievementOpenChange={setIsAchievementOpen}
+                scrollContainerRef={scrollRef}
+              />
             </div>
           </motion.div>
         </motion.div>

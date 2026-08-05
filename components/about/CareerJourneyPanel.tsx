@@ -1,4 +1,5 @@
 import { career } from "@/data/career";
+import { cn } from "@/lib/cn";
 
 export function CareerJourneyPanel() {
   return (
@@ -6,10 +7,13 @@ export function CareerJourneyPanel() {
       <p className="text-xs font-medium tracking-wide text-muted uppercase">Career journey</p>
 
       <ol className="mt-5 flex flex-col gap-4 border-l border-border pl-6">
-        {career.map((entry) => (
+        {career.map((entry, i) => (
           <li key={entry.company} className="relative">
             <span
-              className="absolute top-2 -left-[29px] h-2.5 w-2.5 rounded-full border-2 border-surface bg-muted"
+              className={cn(
+                "absolute top-2 -left-[29px] h-2.5 w-2.5 rounded-full border-2 border-surface",
+                i === 0 ? "bg-foreground" : "bg-muted"
+              )}
               aria-hidden
             />
             <div className="rounded-xl border border-border bg-background p-4">
@@ -35,7 +39,7 @@ export function CareerJourneyPanel() {
                       <ul className="mt-2 flex flex-col gap-1">
                         {role.bullets.map((bullet) => (
                           <li key={bullet} className="flex gap-2 text-xs leading-relaxed text-muted">
-                            <span aria-hidden>–</span>
+                            <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted" />
                             <span>{bullet}</span>
                           </li>
                         ))}

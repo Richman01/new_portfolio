@@ -3,7 +3,7 @@ import type { AboutStat } from "@/lib/types";
 export const aboutStats: AboutStat[] = [
   {
     label: "Role",
-    value: "Product Designer — currently Founding Product Designer at AskMySCU.",
+    value: "Product Designer, currently Founding Product Designer at AskMySCU.",
   },
   {
     label: "Focus",

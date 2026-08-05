@@ -20,6 +20,7 @@ interface PlaceholderBlockProps {
   color?: string;
   sizeVariant: PlaceholderSizeVariant;
   className?: string;
+  priority?: boolean;
 }
 
 export function PlaceholderBlock({
@@ -29,11 +30,12 @@ export function PlaceholderBlock({
   color = "#6b6b6f",
   sizeVariant,
   className,
+  priority = false,
 }: PlaceholderBlockProps) {
   if (src) {
     return (
       <div className={cn("relative overflow-hidden", variantClasses[sizeVariant], className)}>
-        <Image src={src} alt={alt} fill className="object-cover" />
+        <Image src={src} alt={alt} fill priority={priority} className="object-cover" />
       </div>
     );
   }

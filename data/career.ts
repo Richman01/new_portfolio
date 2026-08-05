@@ -6,7 +6,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Founding Product Designer",
-        dateRange: "June 2025 — Present (7 mo)",
+        dateRange: "June 2025 - Present (7 mo)",
       },
     ],
   },
@@ -16,12 +16,12 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Product Designer",
-        dateRange: "August 2024 — Present (1 yr 5 mo)",
+        dateRange: "August 2024 - Present (1 yr 5 mo)",
         location: "Lagos State, Nigeria",
       },
       {
         title: "Product Design Intern",
-        dateRange: "February 2024 — July 2024 (6 mo)",
+        dateRange: "February 2024 - July 2024 (6 mo)",
         location: "Lagos State, Nigeria",
       },
     ],
@@ -31,7 +31,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Product and Brand Design Lead",
-        dateRange: "March 2024 — February 2025 (1 yr)",
+        dateRange: "March 2024 - February 2025 (1 yr)",
       },
     ],
   },
@@ -40,7 +40,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Lead Graphic Designer",
-        dateRange: "November 2023 — January 2025 (1 yr 3 mo)",
+        dateRange: "November 2023 - January 2025 (1 yr 3 mo)",
         location: "Lagos State, Nigeria",
         bullets: [
           "Oversaw all design aspects, including print, social, product, and web for Homeland.",
@@ -55,7 +55,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Lead Digital Designer",
-        dateRange: "November 2023 — January 2025 (1 yr 3 mo)",
+        dateRange: "November 2023 - January 2025 (1 yr 3 mo)",
         location: "Lagos, Lagos State, Nigeria",
         bullets: [
           "Developed social designs to enhance online presence for PropertyPro Africa.",
@@ -70,7 +70,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Digital Designer",
-        dateRange: "April 2022 — December 2022 (9 mo)",
+        dateRange: "April 2022 - December 2022 (9 mo)",
         location: "Lagos, Nigeria",
         bullets: [
           "Played a key role in shaping a new design system for the company.",
@@ -89,7 +89,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Lead Designer",
-        dateRange: "October 2019 — August 2022 (2 yr 11 mo)",
+        dateRange: "October 2019 - August 2022 (2 yr 11 mo)",
       },
     ],
   },
@@ -98,7 +98,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Product Designer",
-        dateRange: "June 2020 — November 2021 (1 yr 6 mo)",
+        dateRange: "June 2020 - November 2021 (1 yr 6 mo)",
         location: "Lagos, Nigeria",
       },
     ],
@@ -108,7 +108,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Graphic Designer",
-        dateRange: "November 2019 — November 2021 (2 yr 1 mo)",
+        dateRange: "November 2019 - November 2021 (2 yr 1 mo)",
         location: "Lagos, Nigeria",
       },
     ],
@@ -118,7 +118,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Graphic Designer (Volunteer)",
-        dateRange: "April 2020 — October 2021 (1 yr 7 mo)",
+        dateRange: "April 2020 - October 2021 (1 yr 7 mo)",
         location: "Lagos, Nigeria",
         bullets: ["SGE Design Team"],
       },
@@ -129,7 +129,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "UI/UX",
-        dateRange: "February 2021 — April 2021 (3 mo)",
+        dateRange: "February 2021 - April 2021 (3 mo)",
         location: "Lagos, Nigeria",
         bullets: ["Completed the UI/UX track on the Side Hustle Internship."],
       },
@@ -140,7 +140,7 @@ export const career: CareerEntry[] = [
     roles: [
       {
         title: "Graphic Designer",
-        dateRange: "October 2019 — January 2020 (4 mo)",
+        dateRange: "October 2019 - January 2020 (4 mo)",
       },
     ],
   },

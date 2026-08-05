@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type MouseEvent as ReactMouseEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CaseStudyContent } from "@/components/case-study/CaseStudyContent";
 import { projects } from "@/data/projects";
@@ -11,20 +11,67 @@ import { cn } from "@/lib/cn";
 
 type ExitMode = "close" | "minimize";
 
+interface Box {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+interface ResizeEdges {
+  top?: boolean;
+  right?: boolean;
+  bottom?: boolean;
+  left?: boolean;
+}
+
+const MIN_WIDTH = 420;
+const MIN_HEIGHT = 320;
+const TOP_CLEARANCE = 66; // keeps the window below the fixed navbar pill
+
+function rectToBox(rect: DOMRect): Box {
+  return { x: rect.left, y: rect.top, width: rect.width, height: rect.height };
+}
+
+function clampBox(box: Box): Box {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const width = Math.min(Math.max(box.width, MIN_WIDTH), vw - 16);
+  const height = Math.min(Math.max(box.height, MIN_HEIGHT), vh - 32);
+  const x = Math.min(Math.max(box.x, -width + 160), vw - 160);
+  const y = Math.min(Math.max(box.y, TOP_CLEARANCE), vh - 80);
+  return { x, y, width, height };
+}
+
+const RESIZE_HANDLES: { edges: ResizeEdges; className: string }[] = [
+  { edges: { top: true }, className: "-top-1 left-3 right-3 h-2 cursor-ns-resize" },
+  { edges: { bottom: true }, className: "-bottom-1 left-3 right-3 h-2 cursor-ns-resize" },
+  { edges: { left: true }, className: "-left-1 top-3 bottom-3 w-2 cursor-ew-resize" },
+  { edges: { right: true }, className: "-right-1 top-3 bottom-3 w-2 cursor-ew-resize" },
+  { edges: { top: true, left: true }, className: "-top-1 -left-1 h-3 w-3 cursor-nwse-resize" },
+  { edges: { top: true, right: true }, className: "-top-1 -right-1 h-3 w-3 cursor-nesw-resize" },
+  { edges: { bottom: true, left: true }, className: "-bottom-1 -left-1 h-3 w-3 cursor-nesw-resize" },
+  { edges: { bottom: true, right: true }, className: "-bottom-1 -right-1 h-3 w-3 cursor-nwse-resize" },
+];
+
 export function CaseStudyWindow() {
   const { activeSlug, closeProject, getTriggerRect } = useOverlay();
   const project = activeSlug ? projects.find((p) => p.slug === activeSlug) : null;
 
   const windowRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [isMaximized, setIsMaximized] = useState(false);
+  const [customBox, setCustomBox] = useState<Box | null>(null);
   const [exitMode, setExitMode] = useState<ExitMode>("close");
   const [exitTarget, setExitTarget] = useState({ x: 0, y: 0 });
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [isAchievementOpen, setIsAchievementOpen] = useState(false);
 
   const [prevSlug, setPrevSlug] = useState(activeSlug);
   if (activeSlug !== prevSlug) {
     setPrevSlug(activeSlug);
     setIsMaximized(false);
+    setCustomBox(null);
   }
 
   useScrollLock(Boolean(project));
@@ -33,12 +80,12 @@ export function CaseStudyWindow() {
   useEffect(() => {
     if (!project) return;
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape" && !isLightboxOpen) handleClose();
+      if (e.key === "Escape" && !isLightboxOpen && !isAchievementOpen) handleClose();
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [project, isLightboxOpen]);
+  }, [project, isLightboxOpen, isAchievementOpen]);
 
   function handleClose() {
     setExitMode("close");
@@ -60,6 +107,59 @@ export function CaseStudyWindow() {
     closeProject();
   }
 
+  function beginInteraction(e: ReactMouseEvent, mode: "move" | "resize", edges?: ResizeEdges) {
+    if (isMaximized || !windowRef.current) return;
+    e.preventDefault();
+    const startBox = customBox ?? rectToBox(windowRef.current.getBoundingClientRect());
+    const startMouseX = e.clientX;
+    const startMouseY = e.clientY;
+    document.body.style.userSelect = "none";
+
+    function handleMouseMove(ev: MouseEvent) {
+      const dx = ev.clientX - startMouseX;
+      const dy = ev.clientY - startMouseY;
+
+      if (mode === "move") {
+        setCustomBox(clampBox({ ...startBox, x: startBox.x + dx, y: startBox.y + dy }));
+        return;
+      }
+
+      let { x, y, width, height } = startBox;
+      if (edges?.right) width = startBox.width + dx;
+      if (edges?.bottom) height = startBox.height + dy;
+      if (edges?.left) {
+        width = startBox.width - dx;
+        x = startBox.x + dx;
+      }
+      if (edges?.top) {
+        height = startBox.height - dy;
+        y = startBox.y + dy;
+      }
+      setCustomBox(clampBox({ x, y, width, height }));
+    }
+
+    function handleMouseUp() {
+      document.body.style.userSelect = "";
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    }
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+  }
+
+  const customStyle: CSSProperties | undefined =
+    !isMaximized && customBox
+      ? {
+          position: "fixed",
+          left: customBox.x,
+          top: customBox.y,
+          width: customBox.width,
+          height: customBox.height,
+          margin: 0,
+        }
+      : undefined;
+
   return (
     <AnimatePresence>
       {project && (
@@ -68,8 +168,8 @@ export function CaseStudyWindow() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={cn(
-            "fixed inset-0 z-50 flex items-center justify-center bg-black/30 transition-[padding] duration-300",
-            isMaximized ? "p-0" : "p-4 sm:p-8"
+            "fixed inset-0 z-50 flex items-stretch justify-center bg-black/30 pt-[82px] transition-[padding] duration-300",
+            isMaximized ? "pb-0" : "pb-6"
           )}
           onClick={handleClose}
         >
@@ -80,6 +180,7 @@ export function CaseStudyWindow() {
             aria-label={`${project.title} case study`}
             tabIndex={-1}
             onClick={(e) => e.stopPropagation()}
+            style={customStyle}
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
             exit={
@@ -95,14 +196,34 @@ export function CaseStudyWindow() {
             }
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
             className={cn(
-              "flex flex-col overflow-hidden border border-border bg-surface shadow-2xl",
-              "transition-[width,height,max-width,max-height,border-radius] duration-300 ease-in-out",
+              "relative flex flex-col overflow-hidden border border-border bg-surface shadow-2xl",
+              !customStyle && "transition-[width,height,max-width,max-height,border-radius] duration-300 ease-in-out",
               isMaximized
-                ? "h-screen w-screen max-w-none max-h-none rounded-none"
-                : "h-[85vh] w-[min(92vw,52rem)] max-w-full rounded-xl"
+                ? "h-full w-screen max-w-none max-h-none rounded-none"
+                : customStyle
+                  ? "rounded-2xl"
+                  : "h-full w-[min(92vw,68rem)] max-w-full rounded-2xl"
             )}
           >
-            <div className="flex shrink-0 items-center gap-4 border-b border-border bg-surface px-4 py-3">
+            {!isMaximized &&
+              RESIZE_HANDLES.map(({ edges, className }, i) => (
+                <div
+                  key={i}
+                  onMouseDown={(e) => beginInteraction(e, "resize", edges)}
+                  className={cn("absolute z-10", className)}
+                />
+              ))}
+
+            <div
+              onMouseDown={(e) => {
+                if ((e.target as HTMLElement).closest("button")) return;
+                beginInteraction(e, "move");
+              }}
+              className={cn(
+                "flex shrink-0 items-center gap-4 border-b border-border bg-surface px-4 py-3",
+                !isMaximized && "cursor-grab active:cursor-grabbing"
+              )}
+            >
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -125,7 +246,7 @@ export function CaseStudyWindow() {
               </div>
 
               <div className="flex flex-1 justify-center">
-                <span className="max-w-[70%] truncate rounded-md bg-background px-3 py-1 text-xs text-muted">
+                <span className="max-w-[70%] truncate rounded-full bg-background px-3 py-1 text-xs text-muted">
                   ladapoferanmi.com/work/{project.slug}
                 </span>
               </div>
@@ -133,8 +254,13 @@ export function CaseStudyWindow() {
               <div className="w-[52px] shrink-0" aria-hidden />
             </div>
 
-            <div className="flex-1 overflow-y-auto">
-              <CaseStudyContent project={project} onLightboxOpenChange={setIsLightboxOpen} />
+            <div ref={scrollRef} className="flex-1 overflow-y-auto">
+              <CaseStudyContent
+                project={project}
+                onLightboxOpenChange={setIsLightboxOpen}
+                onAchievementOpenChange={setIsAchievementOpen}
+                scrollContainerRef={scrollRef}
+              />
             </div>
           </motion.div>
         </motion.div>

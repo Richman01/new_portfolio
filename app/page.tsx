@@ -2,12 +2,12 @@ import { TopBar } from "@/components/layout/TopBar";
 import { Hero } from "@/components/hero/Hero";
 import { DockNav } from "@/components/dock/DockNav";
 import { CaseStudyWindow } from "@/components/case-study/CaseStudyWindow";
-import { AuroraBackground } from "@/components/background/AuroraBackground";
+import { ScannerBackground } from "@/components/background/ScannerBackground";
 
 export default function Home() {
   return (
     <main className="relative flex min-h-screen flex-col">
-      <AuroraBackground />
+      <ScannerBackground />
 
       <TopBar />
 

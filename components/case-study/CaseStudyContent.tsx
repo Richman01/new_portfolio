@@ -1,6 +1,7 @@
 "use client";
 
 import type { RefObject } from "react";
+import { BentoCaseStudy } from "@/components/case-study/layouts/BentoCaseStudy";
 import { GalleryCaseStudy } from "@/components/case-study/layouts/GalleryCaseStudy";
 import { NumberedCaseStudy } from "@/components/case-study/layouts/NumberedCaseStudy";
 import { SplitCaseStudy } from "@/components/case-study/layouts/SplitCaseStudy";
@@ -18,6 +19,8 @@ function flattenSectionMedia(sections: CaseStudySection[]): MediaItem[] {
 function collectLightboxImages(caseStudy: CaseStudyLayout): MediaItem[] {
   switch (caseStudy.kind) {
     case "gallery":
+      return caseStudy.media.filter((item) => item.src);
+    case "bento":
       return caseStudy.media.filter((item) => item.src);
     case "numbered": {
       const achievementMedia = (caseStudy.achievements ?? []).flatMap((achievement) => [
@@ -50,6 +53,7 @@ export function CaseStudyContent({
   return (
     <LightboxProvider images={lightboxImages} onOpenChange={onLightboxOpenChange}>
       {caseStudy.kind === "gallery" && <GalleryCaseStudy project={project} caseStudy={caseStudy} />}
+      {caseStudy.kind === "bento" && <BentoCaseStudy project={project} caseStudy={caseStudy} />}
       {caseStudy.kind === "numbered" && (
         <NumberedCaseStudy
           key={project.slug}

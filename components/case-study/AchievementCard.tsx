@@ -13,52 +13,42 @@ export function AchievementCard({
   color: string;
   onOpen: () => void;
 }) {
-  const { cardImage, title, summary, role, date } = achievement;
+  const { title, summary, role, date, cardImage } = achievement;
 
   return (
     <button
       type="button"
       onClick={onOpen}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+      className="group flex items-center gap-4 rounded-2xl border border-border bg-surface p-3 text-left transition-colors hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 sm:gap-5 sm:p-4"
     >
-      <div className="relative aspect-[16/8] w-full overflow-hidden border-b border-border">
-        {cardImage.src && (
-          <Image
-            src={cardImage.src}
-            alt={cardImage.alt}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-            sizes="(min-width: 1024px) 280px, (min-width: 640px) 360px, 100vw"
-          />
-        )}
-        <span className="absolute inset-0 bg-black/0 transition-colors duration-200 group-hover:bg-black/5" />
+      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl sm:h-24 sm:w-24">
+        <Image
+          src={cardImage.src!}
+          alt=""
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+          sizes="96px"
+        />
       </div>
 
-      <div className="flex flex-1 flex-col gap-1 p-3.5">
-        <h3 className="text-sm font-semibold tracking-tight">{title}</h3>
-        <p className="line-clamp-2 text-xs leading-relaxed text-muted">{summary}</p>
-
-        <div className="mt-auto flex items-center justify-between gap-2 pt-3">
-          <div className="truncate text-[11px] text-muted">
-            <span>{role}</span>
-            <span className="mx-1" aria-hidden>
-              /
-            </span>
-            <span>{date}</span>
-          </div>
-
-          <span
-            className="inline-flex shrink-0 items-center gap-1 rounded-full border border-border px-2.5 py-1 text-[11px] font-medium transition-colors group-hover:bg-surface-hover"
-            style={{ borderColor: color, color }}
-          >
-            View
-            <ArrowUpRight
-              size={11}
-              className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
+      <div className="flex min-w-0 flex-1 flex-col gap-1">
+        <h3 className="truncate text-base font-bold tracking-tight sm:text-lg">{title}</h3>
+        <p className="line-clamp-2 text-sm leading-relaxed text-muted">{summary}</p>
+        <div className="mt-1 flex flex-wrap gap-1.5">
+          <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted">
+            {role}
+          </span>
+          <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted">
+            {date}
           </span>
         </div>
       </div>
+
+      <ArrowUpRight
+        size={16}
+        style={{ color }}
+        className="ml-auto hidden shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:block"
+      />
     </button>
   );
 }

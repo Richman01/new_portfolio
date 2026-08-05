@@ -17,9 +17,7 @@ function SplitSectionBlock({ section, color }: { section: CaseStudySection; colo
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="mb-10 max-w-2xl last:mb-0"
     >
-      <h2 className="text-xs font-semibold uppercase tracking-wider" style={{ color }}>
-        {section.heading}
-      </h2>
+      <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">{section.heading}</h2>
       <div className="mt-3 flex flex-col gap-4">
         {section.body.map((paragraph, i) => (
           <p key={i} className="text-base leading-relaxed text-muted">
@@ -33,10 +31,12 @@ function SplitSectionBlock({ section, color }: { section: CaseStudySection; colo
       {section.bullets && (
         <ul className="mt-4 flex flex-col gap-2">
           {section.bullets.map((bullet, i) => (
-            <li key={i} className="flex gap-2 text-base leading-relaxed text-muted">
-              <span aria-hidden style={{ color }}>
-                —
-              </span>
+            <li key={i} className="flex gap-2.5 text-base leading-relaxed text-muted">
+              <span
+                aria-hidden
+                className="mt-2.5 h-1 w-1 shrink-0 rounded-full"
+                style={{ backgroundColor: color }}
+              />
               {bullet}
             </li>
           ))}
@@ -47,7 +47,7 @@ function SplitSectionBlock({ section, color }: { section: CaseStudySection; colo
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {section.statGrid.map((stat, i) => (
             <div key={i} className="rounded-2xl border border-border bg-surface p-5">
-              <div className="text-3xl font-semibold" style={{ color }}>
+              <div className="text-3xl font-semibold sm:text-4xl" style={{ color }}>
                 {stat.value}
               </div>
               <div className="mt-2 text-sm leading-relaxed text-muted">{stat.label}</div>
@@ -85,22 +85,22 @@ export function SplitCaseStudy({
             style={{ borderColor: project.color }}
           >
             <div>
-              <span className="block text-[10px] font-semibold uppercase tracking-wider text-muted">
+              <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">
                 Category
               </span>
               <span className="text-sm text-foreground">{rail.category}</span>
             </div>
             <div>
-              <span className="block text-[10px] font-semibold uppercase tracking-wider text-muted">Date</span>
+              <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">Date</span>
               <span className="text-sm text-foreground">{rail.date}</span>
             </div>
             <div>
-              <span className="block text-[10px] font-semibold uppercase tracking-wider text-muted">Role</span>
+              <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">Role</span>
               <span className="text-sm text-foreground">{rail.role}</span>
             </div>
             {rail.liveUrl && (
               <div>
-                <span className="block text-[10px] font-semibold uppercase tracking-wider text-muted">
+                <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">
                   Live site
                 </span>
                 <a

@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { OverlayProvider } from "@/lib/OverlayContext";
 import { site } from "@/data/site";
 import "./globals.css";
 
-const fontSans = DM_Sans({
+const fontSans = Outfit({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.title}`,
+  title: `${site.name} - ${site.title}`,
   description: site.bio,
 };
 

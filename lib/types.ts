@@ -15,6 +15,8 @@ export interface StatItem {
   label: string;
 }
 
+export type SectionFamily = "hero" | "text-only" | "structured-list" | "stat-forward" | "media-pair" | "standard";
+
 export interface CaseStudySection {
   heading: string;
   body: string[];
@@ -23,6 +25,8 @@ export interface CaseStudySection {
   stat?: StatItem;
   statGrid?: StatItem[];
   media?: MediaItem | MediaItem[];
+  /** Optional override for the section-beat visual treatment; auto-resolved from content shape when absent. */
+  layout?: SectionFamily;
 }
 
 export interface Achievement {
@@ -32,6 +36,7 @@ export interface Achievement {
   role: string;
   date: string;
   liveUrl?: string;
+  tags?: string[];
   cardImage: MediaItem;
   cover?: MediaItem;
   intro: { body: string[]; quote?: string };
@@ -44,6 +49,11 @@ export type CaseStudyLayout =
       lede: string;
       media: MediaItem[];
       videos?: { id: string; title: string }[];
+    }
+  | {
+      kind: "bento";
+      lede: string;
+      media: MediaItem[];
     }
   | {
       kind: "numbered";
@@ -70,6 +80,7 @@ export interface ProjectMeta {
   dockLabel: string;
   icon?: string;
   liveUrl?: string;
+  tags?: string[];
   caseStudy: CaseStudyLayout;
 }
 

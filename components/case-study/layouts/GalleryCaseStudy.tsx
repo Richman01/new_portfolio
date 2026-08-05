@@ -56,7 +56,7 @@ export function GalleryCaseStudy({
           </div>
         )}
 
-        <div className="mt-12 rounded-3xl bg-surface p-3 sm:mt-16 sm:p-6">
+        <div className="mt-12 rounded-2xl bg-surface p-3 sm:mt-16 sm:p-6">
           <div className="flex flex-col gap-6 sm:gap-8">
             {media.map((item, i) => (
               <motion.div

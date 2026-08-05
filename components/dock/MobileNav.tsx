@@ -20,7 +20,7 @@ export function MobileNav() {
           key={project.slug}
           type="button"
           onClick={(e) => openProject(project.slug, e.currentTarget)}
-          className="flex flex-col items-center gap-1.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="flex flex-col items-center gap-1.5 rounded-[28%] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           <div className="aspect-square w-full max-w-14">
             <PlaceholderBlock
@@ -44,7 +44,7 @@ export function MobileNav() {
           target={social.kind === "email" ? undefined : "_blank"}
           rel={social.kind === "email" ? undefined : "noopener noreferrer"}
           aria-label={social.label}
-          className="flex flex-col items-center gap-1.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          className="flex flex-col items-center gap-1.5 rounded-[28%] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           <div className="aspect-square w-full max-w-14">
             <SocialBadge social={social} className="h-full w-full" glyphSize={22} />

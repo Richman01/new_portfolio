@@ -16,7 +16,7 @@ export function SocialIcon({ social, size = 44, className }: SocialIconProps) {
     return (
       <span
         aria-disabled
-        title={`${social.label} — coming soon`}
+        title={`${social.label} (coming soon)`}
         className="inline-flex cursor-not-allowed"
       >
         {badge}

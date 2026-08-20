@@ -8,7 +8,7 @@ export const projects: ProjectMeta[] = [
     date: "Ongoing",
     status: "live",
     category: "brand-graphic",
-    color: "#57534E",
+    color: "#7C9A3E",
     dockLabel: "Randoms",
     tags: ["Explorations", "Mixed Media", "Behind the Scenes"],
     caseStudy: {

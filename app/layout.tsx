@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { OverlayProvider } from "@/lib/OverlayContext";
@@ -14,6 +14,10 @@ const fontSans = Outfit({
 export const metadata: Metadata = {
   title: `${site.name} - ${site.title}`,
   description: site.bio,
+};
+
+export const viewport: Viewport = {
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

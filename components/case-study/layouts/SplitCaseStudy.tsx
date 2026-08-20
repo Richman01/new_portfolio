@@ -1,10 +1,18 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ScreenMoment } from "@/components/case-study/ScreenMoment";
 import { PullQuote } from "@/components/case-study/PullQuote";
 import { SectionMedia } from "@/components/case-study/SectionMedia";
+import { ProjectMasthead } from "@/components/case-study/ProjectMasthead";
+import { SplitScrollShell, type RailBeat } from "@/components/case-study/SplitScrollShell";
 import type { CaseStudyLayout, CaseStudySection, ProjectMeta } from "@/lib/types";
+
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
 function SplitSectionBlock({ section, color }: { section: CaseStudySection; color: string }) {
   const prefersReducedMotion = useReducedMotion();
@@ -15,10 +23,9 @@ function SplitSectionBlock({ section, color }: { section: CaseStudySection; colo
       whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="mb-10 max-w-2xl last:mb-0"
+      className="max-w-3xl"
     >
-      <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">{section.heading}</h2>
-      <div className="mt-3 flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
         {section.body.map((paragraph, i) => (
           <p key={i} className="text-base leading-relaxed text-muted">
             {paragraph}
@@ -44,16 +51,19 @@ function SplitSectionBlock({ section, color }: { section: CaseStudySection; colo
       )}
 
       {section.statGrid && (
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <dl className="mt-8 grid grid-cols-1 border-y border-border sm:grid-cols-2">
           {section.statGrid.map((stat, i) => (
-            <div key={i} className="rounded-2xl border border-border bg-surface p-5">
-              <div className="text-3xl font-semibold sm:text-4xl" style={{ color }}>
+            <div
+              key={i}
+              className="border-b border-border py-6 last:border-b-0 odd:sm:pr-6 even:sm:border-l even:sm:pl-6 [&:nth-last-child(-n+2)]:sm:border-b-0"
+            >
+              <dt className="text-3xl font-semibold tracking-tight sm:text-4xl" style={{ color }}>
                 {stat.value}
-              </div>
-              <div className="mt-2 text-sm leading-relaxed text-muted">{stat.label}</div>
+              </dt>
+              <dd className="mt-2 text-sm leading-relaxed text-muted">{stat.label}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       )}
 
       <SectionMedia media={section.media} />
@@ -69,58 +79,42 @@ export function SplitCaseStudy({
   caseStudy: Extract<CaseStudyLayout, { kind: "split" }>;
 }) {
   const { cover, rail, sections } = caseStudy;
+  const overview = sections[0]?.heading.toLowerCase() === "overview" ? sections[0] : undefined;
+  const mastheadDescription = overview?.body.slice(0, 1) ?? [];
+
+  const beats: RailBeat[] = sections.map((section, index) => {
+    const presentedSection =
+      index === 0 && overview && overview.body.length > 1
+        ? { ...section, body: overview.body.slice(1) }
+        : section;
+
+    return {
+      id: slugify(section.heading) || `section-${index}`,
+      navLabel: section.heading,
+      navBlurb: section.body[0],
+      content: <SplitSectionBlock section={presentedSection} color={project.color} />,
+    };
+  });
 
   return (
-    <article aria-label={`${project.title} case study`} className="pt-10 pb-24">
-      <div className="mx-auto max-w-4xl px-6">
-        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{project.title}</h1>
-
-        <div className="mt-8">
-          <ScreenMoment item={cover} />
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-[220px_1fr] sm:gap-12">
-          <aside
-            className="flex flex-col gap-4 border-t-2 pt-4 sm:sticky sm:top-6 sm:self-start"
-            style={{ borderColor: project.color }}
-          >
-            <div>
-              <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">
-                Category
-              </span>
-              <span className="text-sm text-foreground">{rail.category}</span>
-            </div>
-            <div>
-              <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">Date</span>
-              <span className="text-sm text-foreground">{rail.date}</span>
-            </div>
-            <div>
-              <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">Role</span>
-              <span className="text-sm text-foreground">{rail.role}</span>
-            </div>
-            {rail.liveUrl && (
-              <div>
-                <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">
-                  Live site
-                </span>
-                <a
-                  href={rail.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm underline decoration-border underline-offset-2 transition-colors hover:text-foreground"
-                >
-                  Visit site →
-                </a>
-              </div>
-            )}
-          </aside>
-
-          <div>
-            {sections.map((section, i) => (
-              <SplitSectionBlock key={i} section={section} color={project.color} />
-            ))}
-          </div>
-        </div>
+    <article aria-label={`${project.title} case study`} className="pt-8 pb-24 sm:pt-12">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+        <SplitScrollShell
+          topBanner={
+            <ProjectMasthead
+              title={project.title}
+              description={mastheadDescription}
+              role={rail.role}
+              date={rail.date}
+              color={project.color}
+              tags={[rail.category]}
+              liveUrl={rail.liveUrl}
+              cover={cover}
+            />
+          }
+          beats={beats}
+          accentColor={project.color}
+        />
       </div>
     </article>
   );

@@ -22,12 +22,17 @@ export function ImageLightbox() {
   useEffect(() => {
     if (!isOpen) return;
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") close();
-      else if (e.key === "ArrowRight") next();
+      if (e.key === "Escape") {
+        // Capture-phase + stopPropagation so this innermost layer wins over
+        // the mobile drawer's own built-in (Base UI) Escape handling, which
+        // would otherwise intercept the event first and swallow it silently.
+        e.stopPropagation();
+        close();
+      } else if (e.key === "ArrowRight") next();
       else if (e.key === "ArrowLeft") prev();
     }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    window.addEventListener("keydown", onKeyDown, true);
+    return () => window.removeEventListener("keydown", onKeyDown, true);
   }, [isOpen, close, next, prev]);
 
   if (!mounted) return null;

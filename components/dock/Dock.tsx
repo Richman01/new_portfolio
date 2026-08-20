@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
+import { Shuffle } from "lucide-react";
 import { DockIcon } from "@/components/dock/DockIcon";
 import { PlaceholderBlock } from "@/components/shared/PlaceholderBlock";
 import { SocialBadge } from "@/components/shared/SocialBadge";
@@ -38,6 +39,7 @@ export function Dock() {
             src={project.icon}
             alt={`${project.title} logo`}
             label={project.title.slice(0, 2).toUpperCase()}
+            icon={project.slug === "randoms" ? <Shuffle size={22} className="text-white/90" /> : undefined}
             color={project.color}
           />
         </DockIcon>

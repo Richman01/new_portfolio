@@ -2,6 +2,7 @@ import { TopBar } from "@/components/layout/TopBar";
 import { Hero } from "@/components/hero/Hero";
 import { DockNav } from "@/components/dock/DockNav";
 import { CaseStudyWindow } from "@/components/case-study/CaseStudyWindow";
+import { CaseStudyDrawer } from "@/components/case-study/CaseStudyDrawer";
 import { ScannerBackground } from "@/components/background/ScannerBackground";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
       </div>
 
       <CaseStudyWindow />
+      <CaseStudyDrawer />
     </main>
   );
 }

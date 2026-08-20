@@ -3,14 +3,8 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLightbox } from "@/lib/LightboxContext";
+import { ProjectMasthead } from "@/components/case-study/ProjectMasthead";
 import type { CaseStudyLayout, MediaItem, ProjectMeta } from "@/lib/types";
-
-function tileSpan(item: MediaItem): string {
-  const ratio = item.width / item.height;
-  if (ratio < 0.95) return "row-span-2";
-  if (ratio > 1.35) return "col-span-2";
-  return "";
-}
 
 function BentoTile({ item, index }: { item: MediaItem; index: number }) {
   const { open } = useLightbox();
@@ -27,14 +21,15 @@ function BentoTile({ item, index }: { item: MediaItem; index: number }) {
       whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, ease: "easeOut", delay: (index % 6) * 0.04 }}
-      className={`group relative block overflow-hidden rounded-2xl border border-border shadow-sm transition-shadow duration-300 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 ${tileSpan(item)}`}
+      className="group mb-4 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-border bg-background shadow-sm transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 sm:mb-5"
     >
       <Image
         src={item.src}
         alt={item.alt}
-        fill
-        className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+        width={item.width}
+        height={item.height}
+        className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.015]"
+        sizes="(min-width: 1024px) 28vw, (min-width: 640px) 44vw, 100vw"
       />
     </motion.button>
   );
@@ -50,24 +45,19 @@ export function BentoCaseStudy({
   const { lede, media } = caseStudy;
 
   return (
-    <article aria-label={`${project.title} case study`} className="pt-10 pb-24">
-      <div className="mx-auto max-w-4xl px-6">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-xl">
-            <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{project.title}</h1>
-            <p className="mt-4 text-base leading-relaxed text-muted">{lede}</p>
-          </div>
+    <article aria-label={`${project.title} case study`} className="pt-8 pb-24 sm:pt-12">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+        <ProjectMasthead
+          title={project.title}
+          description={[lede]}
+          role={project.role}
+          date={project.date}
+          color={project.color}
+          icon={project.icon}
+          tags={project.tags}
+        />
 
-          <div className="shrink-0 text-sm text-muted sm:text-right">
-            <span>{project.role}</span>
-            <span className="mx-1.5" aria-hidden>
-              /
-            </span>
-            <span>{project.date}</span>
-          </div>
-        </div>
-
-        <div className="mt-12 grid auto-rows-[130px] grid-cols-2 grid-flow-row-dense gap-3 sm:mt-16 sm:auto-rows-[150px] sm:grid-cols-3 sm:gap-4 lg:auto-rows-[170px] lg:grid-cols-4">
+        <div className="mt-10 columns-1 sm:mt-14 sm:columns-2 lg:columns-3 sm:gap-5">
           {media.map((item, i) => (
             <BentoTile key={item.src ?? i} item={item} index={i} />
           ))}

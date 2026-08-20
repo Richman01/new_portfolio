@@ -7,6 +7,7 @@ import { projects } from "@/data/projects";
 import { useOverlay } from "@/lib/OverlayContext";
 import { useScrollLock } from "@/lib/useScrollLock";
 import { useFocusTrap } from "@/lib/useFocusTrap";
+import { useIsMobileViewport } from "@/lib/useIsMobileViewport";
 import { cn } from "@/lib/cn";
 
 type ExitMode = "close" | "minimize";
@@ -57,6 +58,7 @@ const RESIZE_HANDLES: { edges: ResizeEdges; className: string }[] = [
 export function CaseStudyWindow() {
   const { activeSlug, closeProject, getTriggerRect } = useOverlay();
   const project = activeSlug ? projects.find((p) => p.slug === activeSlug) : null;
+  const isMobile = useIsMobileViewport();
 
   const windowRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -74,18 +76,18 @@ export function CaseStudyWindow() {
     setCustomBox(null);
   }
 
-  useScrollLock(Boolean(project));
-  useFocusTrap(windowRef, Boolean(project));
+  useScrollLock(Boolean(project) && !isMobile);
+  useFocusTrap(windowRef, Boolean(project) && !isMobile);
 
   useEffect(() => {
-    if (!project) return;
+    if (!project || isMobile) return;
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape" && !isLightboxOpen && !isAchievementOpen) handleClose();
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [project, isLightboxOpen, isAchievementOpen]);
+  }, [project, isLightboxOpen, isAchievementOpen, isMobile]);
 
   function handleClose() {
     setExitMode("close");
@@ -162,13 +164,13 @@ export function CaseStudyWindow() {
 
   return (
     <AnimatePresence>
-      {project && (
+      {!isMobile && project && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={cn(
-            "fixed inset-0 z-50 flex items-stretch justify-center bg-black/30 pt-[82px] transition-[padding] duration-300",
+            "fixed inset-0 z-50 flex items-stretch justify-center bg-black/35 pt-[74px] backdrop-blur-[2px] transition-[padding] duration-300",
             isMaximized ? "pb-0" : "pb-6"
           )}
           onClick={handleClose}
@@ -196,13 +198,13 @@ export function CaseStudyWindow() {
             }
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
             className={cn(
-              "relative flex flex-col overflow-hidden border border-border bg-surface shadow-2xl",
+              "relative flex flex-col overflow-hidden border border-border/90 bg-surface shadow-[0_28px_90px_rgba(0,0,0,0.28)]",
               !customStyle && "transition-[width,height,max-width,max-height,border-radius] duration-300 ease-in-out",
               isMaximized
                 ? "h-full w-screen max-w-none max-h-none rounded-none"
                 : customStyle
                   ? "rounded-2xl"
-                  : "h-full w-[min(92vw,68rem)] max-w-full rounded-2xl"
+                  : "h-full w-[min(94vw,80rem)] max-w-full rounded-2xl"
             )}
           >
             {!isMaximized &&
@@ -220,7 +222,7 @@ export function CaseStudyWindow() {
                 beginInteraction(e, "move");
               }}
               className={cn(
-                "flex shrink-0 items-center gap-4 border-b border-border bg-surface px-4 py-3",
+                "flex shrink-0 items-center gap-4 border-b border-border bg-surface/95 px-4 py-3 backdrop-blur-xl",
                 !isMaximized && "cursor-grab active:cursor-grabbing"
               )}
             >
@@ -246,7 +248,7 @@ export function CaseStudyWindow() {
               </div>
 
               <div className="flex flex-1 justify-center">
-                <span className="max-w-[70%] truncate rounded-full bg-background px-3 py-1 text-xs text-muted">
+                <span className="max-w-[70%] truncate rounded-full border border-border/70 bg-background px-3 py-1 text-xs text-muted">
                   ladapoferanmi.com/work/{project.slug}
                 </span>
               </div>

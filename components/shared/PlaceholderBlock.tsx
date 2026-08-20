@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export type PlaceholderSizeVariant = "dock-icon" | "hero-avatar";
@@ -17,6 +18,8 @@ interface PlaceholderBlockProps {
   src?: string;
   alt: string;
   label?: string;
+  /** Takes priority over `label` when there's no `src` - a small icon glyph instead of initials. */
+  icon?: ReactNode;
   color?: string;
   sizeVariant: PlaceholderSizeVariant;
   className?: string;
@@ -27,6 +30,7 @@ export function PlaceholderBlock({
   src,
   alt,
   label,
+  icon,
   color = "#6b6b6f",
   sizeVariant,
   className,
@@ -51,7 +55,7 @@ export function PlaceholderBlock({
         className
       )}
     >
-      {label && (
+      {icon ?? (label && (
         <span
           className={cn(
             "px-2 text-center font-medium text-white/90",
@@ -60,7 +64,7 @@ export function PlaceholderBlock({
         >
           {label}
         </span>
-      )}
+      ))}
     </div>
   );
 }

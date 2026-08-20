@@ -11,7 +11,7 @@ export function ScreenMoment({ item, frameless = false }: { item: MediaItem; fra
   if (item.videoSrc) {
     return (
       <div
-        className={cn("overflow-hidden rounded-2xl", !frameless && "border border-border shadow-sm")}
+        className={cn("overflow-hidden rounded-2xl bg-background", !frameless && "border border-border shadow-sm")}
         style={{ aspectRatio: `${item.width} / ${item.height}` }}
       >
         <video controls className="h-full w-full">
@@ -29,8 +29,8 @@ export function ScreenMoment({ item, frameless = false }: { item: MediaItem; fra
       onClick={() => open(item.src!)}
       aria-label={item.label ? `Expand ${item.label}` : "Expand image"}
       className={cn(
-        "group relative block w-full overflow-hidden rounded-2xl transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
-        !frameless && "border border-border shadow-sm hover:shadow-lg"
+        "group relative block w-full overflow-hidden rounded-2xl bg-background transition-[box-shadow,transform] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+        !frameless && "border border-border shadow-[0_10px_35px_rgba(0,0,0,0.07)] hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(0,0,0,0.12)]"
       )}
     >
       <Image
@@ -39,7 +39,7 @@ export function ScreenMoment({ item, frameless = false }: { item: MediaItem; fra
         width={item.width}
         height={item.height}
         className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.01]"
-        sizes="(min-width: 1024px) 720px, 100vw"
+        sizes="(min-width: 1280px) 1120px, (min-width: 768px) 88vw, 100vw"
       />
     </button>
   );

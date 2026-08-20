@@ -2,11 +2,11 @@
 
 import { useEffect, useState, type RefObject } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
-import { ArrowUpRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { PullQuote } from "@/components/case-study/PullQuote";
 import { SectionMedia } from "@/components/case-study/SectionMedia";
 import { AchievementCard } from "@/components/case-study/AchievementCard";
+import { ProjectMasthead } from "@/components/case-study/ProjectMasthead";
 import { SplitScrollShell, type RailBeat } from "@/components/case-study/SplitScrollShell";
 import { BackLink } from "@/components/shared/BackLink";
 import { useLightbox } from "@/lib/LightboxContext";
@@ -27,36 +27,6 @@ function slugify(text: string) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
-}
-
-function TagPills({ tags }: { tags?: string[] }) {
-  if (!tags || tags.length === 0) return null;
-  return (
-    <div className="flex flex-wrap gap-1.5">
-      {tags.map((tag) => (
-        <span
-          key={tag}
-          className="rounded-full border border-border px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide text-muted"
-        >
-          {tag}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function VisitSiteButton({ href, color }: { href: string; color: string }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium transition-colors hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-    >
-      Visit site
-      <ArrowUpRight size={14} style={{ color }} />
-    </a>
-  );
 }
 
 function ProjectBanner({
@@ -83,71 +53,39 @@ function ProjectBanner({
   body: string[];
 }) {
   return (
-    <div className="flex flex-col gap-8">
-      {backButton}
-
-      {cover?.src && (
-        <div className="flex flex-col overflow-hidden rounded-2xl border border-border sm:flex-row sm:h-64">
-          <div
-            className="flex shrink-0 items-center justify-center p-8 sm:w-56"
-            style={{ backgroundColor: color }}
-          >
-            {icon && (
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[28%]">
-                <Image src={icon} alt="" fill className="object-cover" />
-              </div>
-            )}
-          </div>
-          <div className="relative min-h-[180px] flex-1 sm:min-h-0">
-            <Image src={cover.src} alt={cover.alt} fill className="object-cover" sizes="720px" />
-          </div>
-        </div>
-      )}
-
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h1>
-          {liveUrl && <VisitSiteButton href={liveUrl} color={color} />}
-        </div>
-
-        <div className="flex flex-col gap-4">
-          {body.map((paragraph, i) => (
-            <p key={i} className="max-w-2xl text-base leading-relaxed text-muted">
-              {paragraph}
-            </p>
-          ))}
-        </div>
-
-        <div className="flex flex-wrap gap-8 text-sm">
-          <div>
-            <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">Role</span>
-            <span className="text-foreground">{role}</span>
-          </div>
-          <div>
-            <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">Timeline</span>
-            <span className="text-foreground">{date}</span>
-          </div>
-        </div>
-
-        <TagPills tags={tags} />
-      </div>
-    </div>
+    <ProjectMasthead
+      title={title}
+      description={body}
+      role={role}
+      date={date}
+      color={color}
+      icon={icon}
+      tags={tags}
+      liveUrl={liveUrl}
+      cover={cover}
+      backButton={backButton}
+    />
   );
 }
 
 function BulletChips({ bullets, color }: { bullets: string[]; color: string }) {
   return (
-    <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+    <ul className="mt-7 border-y border-border">
       {bullets.map((bullet, i) => (
-        <div
+        <li
           key={i}
-          className="flex items-start gap-2 rounded-2xl border border-border px-4 py-3 text-sm leading-relaxed text-muted"
+          className="flex items-start gap-3 border-b border-border py-4 text-base leading-relaxed text-muted last:border-b-0"
         >
-          <Check size={14} className="mt-0.5 shrink-0" style={{ color }} />
+          <span
+            className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+            style={{ backgroundColor: `${color}18`, color }}
+          >
+            <Check size={13} />
+          </span>
           {bullet}
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
@@ -183,7 +121,7 @@ function SectionBeatBody({
 
   if (family === "text-only") {
     return (
-      <motion.div {...motionProps} className="mx-auto max-w-xl border-t border-border pt-10">
+      <motion.div {...motionProps} className="max-w-3xl">
         {paragraphs}
         {section.quote && <PullQuote quote={section.quote} color={color} />}
       </motion.div>
@@ -301,7 +239,7 @@ function IntroBeatContent({
   color: string;
 }) {
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-3xl">
       {lede && <p className="mb-4 text-xl leading-snug font-semibold tracking-tight">{lede}</p>}
       {body.map((paragraph, i) => (
         <p key={i} className="mb-4 text-base leading-relaxed text-muted">
@@ -311,16 +249,19 @@ function IntroBeatContent({
       {quote && <PullQuote quote={quote} color={color} />}
 
       {stats && (
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <dl className="mt-9 grid grid-cols-1 border-y border-border sm:grid-cols-3">
           {stats.map((stat, i) => (
-            <div key={i} className="rounded-2xl border border-border bg-surface p-5">
-              <div className="text-3xl font-semibold sm:text-4xl" style={{ color }}>
+            <div
+              key={i}
+              className="border-b border-border py-5 last:border-b-0 sm:border-r sm:border-b-0 sm:px-5 sm:first:pl-0 sm:last:border-r-0"
+            >
+              <dt className="text-3xl font-semibold tracking-tight sm:text-4xl" style={{ color }}>
                 {stat.value}
-              </div>
-              <div className="mt-1 text-sm leading-relaxed text-muted">{stat.label}</div>
+              </dt>
+              <dd className="mt-2 text-sm leading-relaxed text-muted">{stat.label}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       )}
     </div>
   );
@@ -376,7 +317,7 @@ function CaseStudyList({
       navLabel: "Selected Work",
       navBlurb: achievementBlurb,
       content: (
-        <div className="flex flex-col gap-3">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {achievements.map((achievement) => (
             <AchievementCard
               key={achievement.slug}
@@ -390,7 +331,14 @@ function CaseStudyList({
     });
   }
 
-  return <SplitScrollShell topBanner={topBanner} beats={beats} scrollContainerRef={scrollContainerRef} />;
+  return (
+    <SplitScrollShell
+      topBanner={topBanner}
+      beats={beats}
+      accentColor={project.color}
+      scrollContainerRef={scrollContainerRef}
+    />
+  );
 }
 
 function AchievementDetail({
@@ -438,7 +386,14 @@ function AchievementDetail({
     ...sections.map((section, i) => sectionToBeat(section, i, color, occurrenceCounts)),
   ];
 
-  return <SplitScrollShell topBanner={topBanner} beats={beats} scrollContainerRef={scrollContainerRef} />;
+  return (
+    <SplitScrollShell
+      topBanner={topBanner}
+      beats={beats}
+      accentColor={color}
+      scrollContainerRef={scrollContainerRef}
+    />
+  );
 }
 
 export function NumberedCaseStudy({
@@ -474,15 +429,21 @@ export function NumberedCaseStudy({
   useEffect(() => {
     if (!activeSlug) return;
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape" && !activeItem) setActiveSlug(null);
+      if (e.key === "Escape" && !activeItem) {
+        // Capture-phase + stopPropagation so this layer wins over the
+        // mobile drawer's own built-in (Base UI) Escape handling, which
+        // would otherwise intercept the event first and swallow it silently.
+        e.stopPropagation();
+        setActiveSlug(null);
+      }
     }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    window.addEventListener("keydown", onKeyDown, true);
+    return () => window.removeEventListener("keydown", onKeyDown, true);
   }, [activeSlug, activeItem]);
 
   return (
-    <article aria-label={`${project.title} case study`} className="pt-10 pb-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <article aria-label={`${project.title} case study`} className="pt-8 pb-24 sm:pt-12">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         <AnimatePresence mode="wait" initial={false}>
           {activeAchievement ? (
             <motion.div

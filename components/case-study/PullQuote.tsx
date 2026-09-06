@@ -1,7 +1,8 @@
 export function PullQuote({ quote, color }: { quote: string; color: string }) {
+  void color;
+
   return (
-    <blockquote className="relative my-8 border-y border-border py-7 pl-8 text-xl font-medium leading-relaxed tracking-tight text-foreground sm:text-2xl">
-      <span aria-hidden className="absolute left-0 top-7 h-10 w-1 rounded-full" style={{ backgroundColor: color }} />
+    <blockquote className="mx-auto my-10 max-w-3xl text-center font-display text-2xl leading-snug font-normal tracking-tight text-foreground sm:my-12 sm:text-3xl">
       {quote}
     </blockquote>
   );

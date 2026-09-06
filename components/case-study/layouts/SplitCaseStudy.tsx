@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { Check } from "lucide-react";
 import { PullQuote } from "@/components/case-study/PullQuote";
 import { SectionMedia } from "@/components/case-study/SectionMedia";
 import { ProjectMasthead } from "@/components/case-study/ProjectMasthead";
@@ -19,15 +20,14 @@ function SplitSectionBlock({ section, color }: { section: CaseStudySection; colo
 
   return (
     <motion.section
-      initial={prefersReducedMotion ? undefined : { opacity: 0, y: 24 }}
+      initial={prefersReducedMotion ? undefined : { opacity: 0, y: 10 }}
       whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="max-w-3xl"
+      viewport={{ once: true, margin: "-64px" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <div className="flex flex-col gap-4">
+      <div className="mx-auto flex max-w-3xl flex-col gap-4 text-center">
         {section.body.map((paragraph, i) => (
-          <p key={i} className="text-base leading-relaxed text-muted">
+          <p key={i} className="text-base leading-7 text-muted sm:text-lg sm:leading-8">
             {paragraph}
           </p>
         ))}
@@ -36,31 +36,24 @@ function SplitSectionBlock({ section, color }: { section: CaseStudySection; colo
       {section.quote && <PullQuote quote={section.quote} color={color} />}
 
       {section.bullets && (
-        <ul className="mt-4 flex flex-col gap-2">
+        <ul className="mx-auto mt-9 flex max-w-2xl flex-col gap-4 text-left">
           {section.bullets.map((bullet, i) => (
-            <li key={i} className="flex gap-2.5 text-base leading-relaxed text-muted">
-              <span
-                aria-hidden
-                className="mt-2.5 h-1 w-1 shrink-0 rounded-full"
-                style={{ backgroundColor: color }}
-              />
-              {bullet}
+            <li key={i} className="flex items-start gap-3 text-base leading-7 text-muted">
+              <Check aria-hidden size={16} className="mt-1 shrink-0" style={{ color }} />
+              <span>{bullet}</span>
             </li>
           ))}
         </ul>
       )}
 
       {section.statGrid && (
-        <dl className="mt-8 grid grid-cols-1 border-y border-border sm:grid-cols-2">
+        <dl className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-8 text-center sm:mt-12 sm:grid-cols-2">
           {section.statGrid.map((stat, i) => (
-            <div
-              key={i}
-              className="border-b border-border py-6 last:border-b-0 odd:sm:pr-6 even:sm:border-l even:sm:pl-6 [&:nth-last-child(-n+2)]:sm:border-b-0"
-            >
-              <dt className="text-3xl font-semibold tracking-tight sm:text-4xl" style={{ color }}>
+            <div key={i}>
+              <dt className="text-4xl font-semibold leading-none tracking-[-0.04em] sm:text-5xl" style={{ color }}>
                 {stat.value}
               </dt>
-              <dd className="mt-2 text-sm leading-relaxed text-muted">{stat.label}</dd>
+              <dd className="mx-auto mt-3 max-w-xs text-sm leading-6 text-muted">{stat.label}</dd>
             </div>
           ))}
         </dl>
@@ -97,8 +90,8 @@ export function SplitCaseStudy({
   });
 
   return (
-    <article aria-label={`${project.title} case study`} className="pt-8 pb-24 sm:pt-12">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+    <article aria-label={`${project.title} case study`} className="pt-8 pb-24 sm:pt-12 sm:pb-32">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <SplitScrollShell
           topBanner={
             <ProjectMasthead
@@ -113,7 +106,6 @@ export function SplitCaseStudy({
             />
           }
           beats={beats}
-          accentColor={project.color}
         />
       </div>
     </article>

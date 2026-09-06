@@ -14,6 +14,7 @@ export function ProjectMasthead({
   liveUrl,
   cover,
   backButton,
+  compactOverview = false,
 }: {
   title: string;
   description: string[];
@@ -25,79 +26,76 @@ export function ProjectMasthead({
   liveUrl?: string;
   cover?: MediaItem;
   backButton?: React.ReactNode;
+  compactOverview?: boolean;
 }) {
+  const monogram = title
+    .split(/\s+/)
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
   return (
-    <header>
-      {backButton && <div className="mb-8">{backButton}</div>}
+    <header className="text-center">
+      {backButton && <div className="mb-10 flex justify-center sm:mb-12">{backButton}</div>}
 
-      <div className="border-b border-border pb-8 sm:pb-10">
-        <span aria-hidden className="mb-6 block h-1 w-10 rounded-full" style={{ backgroundColor: color }} />
-        <div className="flex flex-col gap-7 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
-          <div className="flex min-w-0 items-center gap-4 sm:gap-5">
-            {icon && (
-              <div
-                className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl border border-white/20 shadow-sm sm:h-14 sm:w-14"
-                style={{ backgroundColor: color }}
-              >
-                <Image src={icon} alt="" fill className="object-cover" sizes="56px" />
-              </div>
-            )}
-            <h1 className="text-[clamp(2.5rem,7vw,4.75rem)] font-semibold leading-[0.94] tracking-[-0.055em]">
-              {title}
-            </h1>
-          </div>
+      <div className="mx-auto max-w-4xl">
+        <div
+          aria-hidden
+          className="relative mx-auto flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl text-sm font-semibold text-white sm:h-16 sm:w-16"
+          style={{ backgroundColor: color }}
+        >
+          {icon ? <Image src={icon} alt="" fill className="object-cover" sizes="64px" /> : monogram}
+        </div>
 
-          {liveUrl && (
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-muted">
+          <span>{role}</span>
+          <span aria-hidden>/</span>
+          <span>{date}</span>
+        </div>
+
+        <h1 className={`mx-auto ${compactOverview ? "mt-4" : "mt-8"} max-w-4xl font-display text-[clamp(2.75rem,6vw,4.25rem)] leading-[1.03] font-bold tracking-[-0.03em]`}>
+          {title}
+        </h1>
+
+        <div className="mx-auto mt-7 max-w-3xl space-y-4">
+          {compactOverview && <h2 className="text-sm font-semibold text-foreground">Overview</h2>}
+          {description.map((paragraph, index) => (
+            <p
+              key={index}
+              className={
+                index === 0 && !compactOverview
+                  ? "text-lg leading-relaxed text-foreground/85 sm:text-xl"
+                  : "text-base leading-relaxed text-muted"
+              }
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        {tags && tags.length > 0 && (
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-muted">{tags.join(" / ")}</p>
+        )}
+
+        {liveUrl && (
+          <div className="mt-7 flex justify-center">
             <a
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-border bg-surface px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-hover active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
             >
               Visit site
               <ArrowUpRight size={15} style={{ color }} />
             </a>
-          )}
-        </div>
-
-        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(240px,0.42fr)] lg:items-start lg:gap-16">
-          <div className="max-w-3xl space-y-4">
-            {description.map((paragraph, index) => (
-              <p
-                key={index}
-                className={
-                  index === 0
-                    ? "text-lg leading-relaxed text-foreground sm:text-xl"
-                    : "text-base leading-relaxed text-muted"
-                }
-              >
-                {paragraph}
-              </p>
-            ))}
           </div>
-
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border pt-5 text-sm lg:grid-cols-1">
-            <div>
-              <dt className="text-xs text-muted">Role</dt>
-              <dd className="mt-1 leading-snug text-foreground">{role}</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-muted">Timeline</dt>
-              <dd className="mt-1 text-foreground">{date}</dd>
-            </div>
-            {tags && tags.length > 0 && (
-              <div className="col-span-2 lg:col-span-1">
-                <dt className="text-xs text-muted">Focus</dt>
-                <dd className="mt-1 leading-relaxed text-foreground">{tags.join(" / ")}</dd>
-              </div>
-            )}
-          </dl>
-        </div>
+        )}
       </div>
 
       {cover && (
-        <div className="mt-8 sm:mt-10">
-          <ScreenMoment item={cover} />
+        <div className="mt-14 sm:mt-20">
+          <ScreenMoment item={cover} eager />
         </div>
       )}
     </header>

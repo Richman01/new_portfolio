@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ScreenMoment } from "@/components/case-study/ScreenMoment";
 import { VideoEmbed } from "@/components/case-study/VideoEmbed";
 import { ProjectMasthead } from "@/components/case-study/ProjectMasthead";
-import { cn } from "@/lib/cn";
 import type { CaseStudyLayout, ProjectMeta } from "@/lib/types";
 
 export function GalleryCaseStudy({
@@ -19,8 +18,8 @@ export function GalleryCaseStudy({
   const [hero, ...gallery] = media;
 
   return (
-    <article aria-label={`${project.title} case study`} className="pt-8 pb-24 sm:pt-12">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+    <article aria-label={`${project.title} case study`} className="pt-8 pb-24 sm:pt-12 sm:pb-32">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <ProjectMasthead
           title={project.title}
           description={[lede]}
@@ -34,14 +33,11 @@ export function GalleryCaseStudy({
         />
 
         {videos && videos.length > 0 && (
-          <section className="mt-14 border-t border-border pt-8 sm:mt-20 sm:pt-10">
-            <div className="mb-7 flex items-end justify-between gap-6">
-              <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Campaign films</h2>
-              <p className="hidden max-w-xs text-right text-sm leading-relaxed text-muted sm:block">
-                Motion work created to introduce the product and make the experience easier to understand.
-              </p>
-            </div>
-            <div className="grid gap-5 lg:grid-cols-2">
+          <section className="mt-24 sm:mt-32">
+            <h2 className="mb-8 text-center font-display text-3xl leading-[1.1] font-bold tracking-tight sm:mb-10 sm:text-5xl">
+              Campaign films
+            </h2>
+            <div className="mx-auto flex max-w-5xl flex-col gap-4">
               {videos.map((video) => (
                 <VideoEmbed key={video.id} id={video.id} title={video.title} />
               ))}
@@ -50,17 +46,18 @@ export function GalleryCaseStudy({
         )}
 
         {gallery.length > 0 && (
-          <section className="mt-14 border-t border-border pt-8 sm:mt-20 sm:pt-10">
-            <h2 className="mb-7 text-2xl font-semibold tracking-tight sm:text-3xl">Selected visuals</h2>
-            <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
-              {gallery.map((item, i) => (
+          <section className="mt-24 sm:mt-32">
+            <h2 className="mb-8 text-center font-display text-3xl leading-[1.1] font-bold tracking-tight sm:mb-10 sm:text-5xl">
+              Selected visuals
+            </h2>
+            <div className="flex flex-col gap-3 sm:gap-4">
+              {gallery.map((item, index) => (
                 <motion.div
-                  key={item.src ?? i}
-                  initial={prefersReducedMotion ? undefined : { opacity: 0, y: 24 }}
+                  key={item.src ?? index}
+                  initial={prefersReducedMotion ? undefined : { opacity: 0, y: 10 }}
                   whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  className={cn(i === 0 && gallery.length > 2 && "md:col-span-2")}
+                  viewport={{ once: true, margin: "-64px" }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                 >
                   <ScreenMoment item={item} />
                 </motion.div>

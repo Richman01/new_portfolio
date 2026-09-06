@@ -17,19 +17,19 @@ function BentoTile({ item, index }: { item: MediaItem; index: number }) {
       type="button"
       onClick={() => open(item.src!)}
       aria-label={item.label ? `Expand ${item.label}` : "Expand image"}
-      initial={prefersReducedMotion ? undefined : { opacity: 0, y: 16 }}
+      initial={prefersReducedMotion ? undefined : { opacity: 0, y: 10 }}
       whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.4, ease: "easeOut", delay: (index % 6) * 0.04 }}
-      className="group mb-4 block w-full break-inside-avoid overflow-hidden rounded-2xl border border-border bg-background shadow-sm transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 sm:mb-5"
+      transition={{ duration: 0.4, ease: "easeOut", delay: (index % 4) * 0.04 }}
+      className="group mb-3 block w-full break-inside-avoid overflow-hidden rounded-xl border border-border bg-background transition-transform duration-200 active:scale-[0.995] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 sm:mb-4"
     >
       <Image
         src={item.src}
         alt={item.alt}
         width={item.width}
         height={item.height}
-        className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.015]"
-        sizes="(min-width: 1024px) 28vw, (min-width: 640px) 44vw, 100vw"
+        className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.01]"
+        sizes="(min-width: 768px) 520px, 100vw"
       />
     </motion.button>
   );
@@ -43,10 +43,11 @@ export function BentoCaseStudy({
   caseStudy: Extract<CaseStudyLayout, { kind: "bento" }>;
 }) {
   const { lede, media } = caseStudy;
+  const [hero, ...gallery] = media;
 
   return (
-    <article aria-label={`${project.title} case study`} className="pt-8 pb-24 sm:pt-12">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+    <article aria-label={`${project.title} case study`} className="pt-8 pb-24 sm:pt-12 sm:pb-32">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <ProjectMasthead
           title={project.title}
           description={[lede]}
@@ -55,13 +56,20 @@ export function BentoCaseStudy({
           color={project.color}
           icon={project.icon}
           tags={project.tags}
+          liveUrl={project.liveUrl}
+          cover={hero}
         />
 
-        <div className="mt-10 columns-1 sm:mt-14 sm:columns-2 lg:columns-3 sm:gap-5">
-          {media.map((item, i) => (
-            <BentoTile key={item.src ?? i} item={item} index={i} />
-          ))}
-        </div>
+        <section className="mt-24 sm:mt-32">
+          <h2 className="mb-8 text-center font-display text-3xl leading-[1.1] font-bold tracking-tight sm:mb-10 sm:text-5xl">
+            Selected explorations
+          </h2>
+          <div className="columns-1 gap-3 md:columns-2 md:gap-4">
+            {gallery.map((item, i) => (
+              <BentoTile key={item.src ?? i} item={item} index={i} />
+            ))}
+          </div>
+        </section>
       </div>
     </article>
   );

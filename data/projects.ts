@@ -103,6 +103,89 @@ export const projects: ProjectMeta[] = [
     },
   },
   {
+    slug: "argomars",
+    title: "Argomars",
+    role: "AI Creative Director & Designer",
+    date: "2026",
+    status: "live",
+    category: "featured",
+    color: "#14283C",
+    dockLabel: "Argomars",
+    icon: "/logos/Argomars.png",
+    liveUrl: "https://argomars.vercel.app/#top",
+    tags: ["AI Exploration", "Interaction Design", "Creative Development"],
+    caseStudy: {
+      kind: "numbered",
+      cover: {
+        src: "/images/argomars/cover.jpg",
+        alt: "Argomars cinematic Mars landing page hero",
+        width: 1280,
+        height: 720,
+      },
+      intro: {
+        lede:
+          "A self-directed AI exploration for a fictional Mars initiative, combining cinematic world-building with a simple, scroll-led landing page.",
+        body: [
+          "Argomars began as an experiment in using AI as a creative production partner across an entire web concept. I directed the idea, visual language, narrative, and interaction flow, then used Codex and ChatGPT to build and refine the landing page into a cohesive experience rather than a collection of generated parts.",
+          "The finished page presents a fictional mission to make Mars habitable through propulsion, life-support, habitat, and navigation systems. Its structure moves from the emotional promise of a new world to the practical systems required to survive there.",
+        ],
+      },
+      sections: [
+        {
+          heading: "Concept & Direction",
+          body: [
+            "I treated Argomars like a credible aerospace organization instead of a generic science-fiction brand. The language, restrained interface, technical diagrams, and cinematic landscapes all support the same idea: an ambitious mission communicated with clarity and confidence.",
+          ],
+        },
+        {
+          heading: "A Scroll-Led Hero",
+          body: [
+            "The hero uses scroll as part of the story. The opening landscape establishes scale and wonder, while the transition into the challenge section shifts the tone from aspiration to the realities of surviving on Mars. That movement gives a simple landing page a stronger sense of progression without adding complicated navigation.",
+          ],
+          media: {
+            src: "/images/argomars/cover.jpg",
+            alt: "Argomars hero showing a distant planet above a launch site",
+            width: 1280,
+            height: 720,
+          },
+        },
+        {
+          heading: "Content & AI Workflow",
+          body: [
+            "I used Claude Code to explore and shape the page content, then edited it into a clear narrative with short section labels, bold editorial statements, supporting details, and mission metrics. Codex and ChatGPT supported the development process, helping translate the direction into a responsive page and refine the interactions through iteration.",
+            "The workflow still depended on active art direction: choosing what belonged in the story, cutting language that felt generic, and keeping the tone consistent from the hero through the final call to action.",
+          ],
+        },
+        {
+          heading: "Generated Visual System",
+          body: [
+            "Google Flow and ChatGPT supported image generation for the project. I directed the imagery around two complementary modes: atmospheric landscapes for emotion and precise technical drawings for credibility. The contrast gives the page range while keeping the visual world connected.",
+          ],
+          media: [
+            {
+              src: "/images/argomars/systems.jpg",
+              alt: "Argomars technical system blueprint section",
+              width: 1280,
+              height: 720,
+            },
+            {
+              src: "/images/argomars/mission-progress.jpg",
+              alt: "Argomars mission progress metrics section",
+              width: 1280,
+              height: 720,
+            },
+          ],
+        },
+        {
+          heading: "Final Thoughts",
+          body: [
+            "Argomars helped me test AI across concept development, writing, imagery, and implementation in one focused project. The main lesson was that the tools become far more useful when the direction is specific: a clear story, a controlled visual language, and deliberate pacing turned separate outputs into one believable experience.",
+          ],
+        },
+      ],
+    },
+  },
+  {
     slug: "myscu",
     title: "MySCU",
     role: "Founding Product Designer",
@@ -122,11 +205,7 @@ export const projects: ProjectMeta[] = [
           "A global student-mobility platform pairing every family with a Counsellor and an AI advisor, and the product I've designed end-to-end as its founding designer.",
         body: [
           "MySCU takes a family from a free assessment to a funded offer, scoring real admission chances on day one, then pairing them with a certified Counsellor and Mavi, an AI advisor, to close profile gaps, apply to best-fit schools, and get visa-ready. I joined in June 2025 as the founding (and still only) product designer, shaping everything from the public marketing site to the authenticated Counsellor and student platform.",
-        ],
-        stats: [
-          { value: "1 of 1", label: "Founding & only product designer" },
-          { value: "$65M+", label: "in scholarships secured this cohort" },
-          { value: "6,000+", label: "students on the platform" },
+          "The product began as a scholarship and career advisory experience for students moving from high school into higher education, with accessible resources, mentorship, and simpler application tools at its core.",
         ],
       },
       sections: [],
@@ -334,11 +413,6 @@ export const projects: ProjectMeta[] = [
         body: [
           "Sysserve builds Instanta, an enterprise platform spanning Fleet, Facility, Asset & Inventory, Workplace, Telematics, and Property management. I joined in February 2024 as a Product Design Intern and was promoted to Product Designer six months later, owning design end-to-end with no other designer to hand off to.",
         ],
-        stats: [
-          { value: "6 months", label: "Intern to Product Designer" },
-          { value: "1 of 1", label: "Only designer on the team" },
-          { value: "6", label: "Instanta modules" },
-        ],
       },
       sections: [],
       achievements: [
@@ -382,6 +456,12 @@ export const projects: ProjectMeta[] = [
               media: [
                 { src: "/images/sysserve/2.png", alt: "Sysserve design exploration", width: 1394, height: 1306 },
                 { src: "/images/sysserve/3.png", alt: "Sysserve design exploration", width: 1391, height: 1207 },
+                {
+                  src: "/images/sysserve/redesign-preview.gif",
+                  alt: "Animated walkthrough of the Sysserve website redesign",
+                  width: 1152,
+                  height: 648,
+                },
               ],
             },
             {
@@ -408,6 +488,7 @@ export const projects: ProjectMeta[] = [
               heading: "Final Thoughts",
               body: [
                 "The redesign has significantly improved engagement and lead capture. The client reports a noticeable increase in inquiries, along with positive feedback from stakeholders.",
+                "The work also sharpened how I use component-based design, communicate decisions to developers, and collaborate with marketing and content teams from exploration through launch.",
               ],
             },
           ],
@@ -618,6 +699,7 @@ export const projects: ProjectMeta[] = [
     category: "featured",
     color: "#D65A9A",
     dockLabel: "Babyboom",
+    icon: "/logos/Babyboom.png",
     liveUrl: "https://babyboomafrica.com/",
     caseStudy: {
       kind: "split",
@@ -640,14 +722,14 @@ export const projects: ProjectMeta[] = [
         {
           heading: "The Problem",
           body: [
-            "The market was fragmented: retailers struggled to source authentic products reliably, and the existing supply chain was opaque, slow, and prone to counterfeit goods.",
+            "The market was fragmented: retailers struggled to source authentic products reliably, and the existing supply chain was opaque, slow, and prone to counterfeit goods. Limited access to manufacturers also reduced supply and pushed prices up for businesses further down the chain.",
           ],
           media: { src: "/images/babyboom/problem.png", alt: "Baby Boom supply chain problem", width: 1600, height: 800 },
         },
         {
           heading: "Research & Insights",
           body: [
-            "We interviewed 20+ major retailers and 5 manufacturers to understand the friction points. Trust and logistics visibility emerged as the primary concerns.",
+            "We interviewed 20+ major retailers and 5 manufacturers to understand the friction points. Trust and logistics visibility emerged as the primary concerns, while users consistently asked for clear calls to action and as little navigation time as possible.",
           ],
           media: { src: "/images/babyboom/research.png", alt: "Baby Boom research", width: 800, height: 450 },
         },
@@ -657,6 +739,14 @@ export const projects: ProjectMeta[] = [
             "We designed a brand identity that evokes trust, warmth, and professionalism, paired with a user-centric product interface that simplifies bulk ordering.",
           ],
           bullets: ["Streamlined B2B Checkout Process", "Real-time Inventory Management", "Supplier Verification System"],
+          media: [
+            { src: "/images/babyboom/interface-01.avif", alt: "Babyboom product interface", width: 416, height: 189 },
+            { src: "/images/babyboom/interface-02.avif", alt: "Babyboom commerce interface", width: 463, height: 313 },
+            { src: "/images/babyboom/interface-03.png", alt: "Babyboom website design", width: 1145, height: 630 },
+            { src: "/images/babyboom/interface-04.avif", alt: "Babyboom ordering interface", width: 383, height: 281 },
+            { src: "/images/babyboom/interface-05.avif", alt: "Babyboom product screen", width: 382, height: 280 },
+            { src: "/images/babyboom/interface-06.avif", alt: "Babyboom marketplace screen", width: 385, height: 275 },
+          ],
         },
         {
           heading: "Impact",
@@ -692,12 +782,17 @@ export const projects: ProjectMeta[] = [
     icon: "/logos/Homeland.png",
     caseStudy: {
       kind: "gallery",
-      lede: "I led Homeland's brand design, creating digital assets for website updates, layout enhancements, and campaigns across print, social, product, and web.",
+      lede: "I led Homeland's brand design across social campaigns, print materials, branded merchandise, website updates, and digital marketing collateral.",
       media: [
         { src: "/images/homeland/cover.png", alt: "Homeland brand design", width: 1600, height: 1012 },
         { src: "/images/homeland/1.png", alt: "Homeland Sangotedo Buzz campaign design", width: 1600, height: 1600 },
         { src: "/images/homeland/2.png", alt: "Homeland Father's Day campaign", width: 1300, height: 1300 },
         { src: "/images/homeland/3.png", alt: "Homeland Father's Day campaign", width: 1300, height: 1300 },
+        { src: "/images/homeland/campaign-04.webp", alt: "Homeland Venice investment campaign", width: 1920, height: 1920 },
+        { src: "/images/homeland/campaign-05.avif", alt: "Homeland social campaign design", width: 360, height: 529 },
+        { src: "/images/homeland/campaign-06.webp", alt: "Homeland January campaign design", width: 1920, height: 1920 },
+        { src: "/images/homeland/campaign-07.webp", alt: "Homeland brand campaign artwork", width: 320, height: 320 },
+        { src: "/images/homeland/campaign-08.avif", alt: "Homeland digital campaign artwork", width: 332, height: 321 },
       ],
     },
   },
@@ -741,7 +836,12 @@ export const projects: ProjectMeta[] = [
         { id: "SkECL9P2qS4", title: "Introducing Jalpha Health EHR" },
         { id: "LI0HNAcANRM", title: "Inside Jalpha's EHR" },
       ],
-      media: [{ src: "/images/jalpha-ehr/cover.png", alt: "Jalpha EHR campaign design", width: 1600, height: 1124 }],
+      media: [
+        { src: "/images/jalpha-ehr/cover.png", alt: "Jalpha EHR campaign design", width: 1600, height: 1124 },
+        { src: "/images/jalpha-ehr/campaign-02.webp", alt: "Jalpha World Mental Health Day campaign", width: 1920, height: 1920 },
+        { src: "/images/jalpha-ehr/campaign-03.webp", alt: "Jalpha EHR social campaign artwork", width: 1920, height: 1920 },
+        { src: "/images/jalpha-ehr/campaign-04.webp", alt: "Jalpha EHR digital campaign artwork", width: 1920, height: 1920 },
+      ],
     },
   },
   {
@@ -758,7 +858,10 @@ export const projects: ProjectMeta[] = [
     caseStudy: {
       kind: "gallery",
       lede: "I developed the brand identity for Venhoot, a visual language built to communicate speed and reliability.",
-      media: [{ src: "/images/venhoot/banner.gif", alt: "Venhoot brand preview", width: 1152, height: 648 }],
+      media: [
+        { src: "/images/venhoot/banner.gif", alt: "Venhoot brand preview", width: 1152, height: 648 },
+        { src: "/images/venhoot/brand-02.avif", alt: "Venhoot brand application", width: 250, height: 231 },
+      ],
     },
   },
 ];

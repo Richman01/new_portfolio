@@ -1,12 +1,5 @@
-import { Averia_Serif_Libre } from "next/font/google";
 import { HeroAvatar } from "@/components/hero/HeroAvatar";
 import { site } from "@/data/site";
-import { cn } from "@/lib/cn";
-
-const headlineFont = Averia_Serif_Libre({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
 
 export function Hero() {
   return (
@@ -15,12 +8,7 @@ export function Hero() {
 
       <p className="mt-4 text-base font-medium text-muted">{site.name}</p>
 
-      <h1
-        className={cn(
-          headlineFont.className,
-          "mt-4 max-w-xl text-3xl leading-[1.25] font-bold tracking-tight sm:text-4xl md:text-5xl"
-        )}
-      >
+      <h1 className="mt-4 max-w-xl font-display text-3xl leading-[1.25] font-bold tracking-tight sm:text-4xl md:text-5xl">
         {site.headline}
       </h1>
     </section>

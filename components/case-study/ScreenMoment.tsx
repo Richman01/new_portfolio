@@ -5,16 +5,24 @@ import { useLightbox } from "@/lib/LightboxContext";
 import { cn } from "@/lib/cn";
 import type { MediaItem } from "@/lib/types";
 
-export function ScreenMoment({ item, frameless = false }: { item: MediaItem; frameless?: boolean }) {
+export function ScreenMoment({
+  item,
+  frameless = false,
+  eager = false,
+}: {
+  item: MediaItem;
+  frameless?: boolean;
+  eager?: boolean;
+}) {
   const { open } = useLightbox();
 
   if (item.videoSrc) {
     return (
       <div
-        className={cn("overflow-hidden rounded-2xl", !frameless && "border border-border shadow-sm")}
+        className={cn("overflow-hidden rounded-xl bg-background", !frameless && "border border-border")}
         style={{ aspectRatio: `${item.width} / ${item.height}` }}
       >
-        <video controls className="h-full w-full">
+        <video controls className="h-full w-full object-cover">
           <source src={item.videoSrc} />
         </video>
       </div>
@@ -29,8 +37,8 @@ export function ScreenMoment({ item, frameless = false }: { item: MediaItem; fra
       onClick={() => open(item.src!)}
       aria-label={item.label ? `Expand ${item.label}` : "Expand image"}
       className={cn(
-        "group relative block w-full overflow-hidden rounded-2xl transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
-        !frameless && "border border-border shadow-sm hover:shadow-lg"
+        "group relative block w-full overflow-hidden rounded-xl bg-background transition-transform duration-200 active:scale-[0.995] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+        !frameless && "border border-border"
       )}
     >
       <Image
@@ -38,8 +46,9 @@ export function ScreenMoment({ item, frameless = false }: { item: MediaItem; fra
         alt={item.alt}
         width={item.width}
         height={item.height}
-        className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.01]"
-        sizes="(min-width: 1024px) 720px, 100vw"
+        loading={eager ? "eager" : "lazy"}
+        className="h-auto w-full"
+        sizes="(min-width: 1280px) 1120px, (min-width: 768px) 88vw, 100vw"
       />
     </button>
   );

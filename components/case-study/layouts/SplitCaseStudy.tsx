@@ -1,26 +1,33 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ScreenMoment } from "@/components/case-study/ScreenMoment";
+import { Check } from "lucide-react";
 import { PullQuote } from "@/components/case-study/PullQuote";
 import { SectionMedia } from "@/components/case-study/SectionMedia";
+import { ProjectMasthead } from "@/components/case-study/ProjectMasthead";
+import { SplitScrollShell, type RailBeat } from "@/components/case-study/SplitScrollShell";
 import type { CaseStudyLayout, CaseStudySection, ProjectMeta } from "@/lib/types";
+
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
 function SplitSectionBlock({ section, color }: { section: CaseStudySection; color: string }) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
     <motion.section
-      initial={prefersReducedMotion ? undefined : { opacity: 0, y: 24 }}
+      initial={prefersReducedMotion ? undefined : { opacity: 0, y: 10 }}
       whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="mb-10 max-w-2xl last:mb-0"
+      viewport={{ once: true, margin: "-64px" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">{section.heading}</h2>
-      <div className="mt-3 flex flex-col gap-4">
+      <div className="mx-auto flex max-w-3xl flex-col gap-4 text-center">
         {section.body.map((paragraph, i) => (
-          <p key={i} className="text-base leading-relaxed text-muted">
+          <p key={i} className="text-base leading-7 text-muted sm:text-lg sm:leading-8">
             {paragraph}
           </p>
         ))}
@@ -29,31 +36,27 @@ function SplitSectionBlock({ section, color }: { section: CaseStudySection; colo
       {section.quote && <PullQuote quote={section.quote} color={color} />}
 
       {section.bullets && (
-        <ul className="mt-4 flex flex-col gap-2">
+        <ul className="mx-auto mt-9 flex max-w-2xl flex-col gap-4 text-left">
           {section.bullets.map((bullet, i) => (
-            <li key={i} className="flex gap-2.5 text-base leading-relaxed text-muted">
-              <span
-                aria-hidden
-                className="mt-2.5 h-1 w-1 shrink-0 rounded-full"
-                style={{ backgroundColor: color }}
-              />
-              {bullet}
+            <li key={i} className="flex items-start gap-3 text-base leading-7 text-muted">
+              <Check aria-hidden size={16} className="mt-1 shrink-0" style={{ color }} />
+              <span>{bullet}</span>
             </li>
           ))}
         </ul>
       )}
 
       {section.statGrid && (
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <dl className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-8 text-center sm:mt-12 sm:grid-cols-2">
           {section.statGrid.map((stat, i) => (
-            <div key={i} className="rounded-2xl border border-border bg-surface p-5">
-              <div className="text-3xl font-semibold sm:text-4xl" style={{ color }}>
+            <div key={i}>
+              <dt className="text-4xl font-semibold leading-none tracking-[-0.04em] sm:text-5xl" style={{ color }}>
                 {stat.value}
-              </div>
-              <div className="mt-2 text-sm leading-relaxed text-muted">{stat.label}</div>
+              </dt>
+              <dd className="mx-auto mt-3 max-w-xs text-sm leading-6 text-muted">{stat.label}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       )}
 
       <SectionMedia media={section.media} />
@@ -69,58 +72,41 @@ export function SplitCaseStudy({
   caseStudy: Extract<CaseStudyLayout, { kind: "split" }>;
 }) {
   const { cover, rail, sections } = caseStudy;
+  const overview = sections[0]?.heading.toLowerCase() === "overview" ? sections[0] : undefined;
+  const mastheadDescription = overview?.body.slice(0, 1) ?? [];
+
+  const beats: RailBeat[] = sections.map((section, index) => {
+    const presentedSection =
+      index === 0 && overview && overview.body.length > 1
+        ? { ...section, body: overview.body.slice(1) }
+        : section;
+
+    return {
+      id: slugify(section.heading) || `section-${index}`,
+      navLabel: section.heading,
+      navBlurb: section.body[0],
+      content: <SplitSectionBlock section={presentedSection} color={project.color} />,
+    };
+  });
 
   return (
-    <article aria-label={`${project.title} case study`} className="pt-10 pb-24">
-      <div className="mx-auto max-w-4xl px-6">
-        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{project.title}</h1>
-
-        <div className="mt-8">
-          <ScreenMoment item={cover} />
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-[220px_1fr] sm:gap-12">
-          <aside
-            className="flex flex-col gap-4 border-t-2 pt-4 sm:sticky sm:top-6 sm:self-start"
-            style={{ borderColor: project.color }}
-          >
-            <div>
-              <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">
-                Category
-              </span>
-              <span className="text-sm text-foreground">{rail.category}</span>
-            </div>
-            <div>
-              <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">Date</span>
-              <span className="text-sm text-foreground">{rail.date}</span>
-            </div>
-            <div>
-              <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">Role</span>
-              <span className="text-sm text-foreground">{rail.role}</span>
-            </div>
-            {rail.liveUrl && (
-              <div>
-                <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted">
-                  Live site
-                </span>
-                <a
-                  href={rail.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm underline decoration-border underline-offset-2 transition-colors hover:text-foreground"
-                >
-                  Visit site →
-                </a>
-              </div>
-            )}
-          </aside>
-
-          <div>
-            {sections.map((section, i) => (
-              <SplitSectionBlock key={i} section={section} color={project.color} />
-            ))}
-          </div>
-        </div>
+    <article aria-label={`${project.title} case study`} className="pt-8 pb-24 sm:pt-12 sm:pb-32">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
+        <SplitScrollShell
+          topBanner={
+            <ProjectMasthead
+              title={project.title}
+              description={mastheadDescription}
+              role={rail.role}
+              date={rail.date}
+              color={project.color}
+              tags={[rail.category]}
+              liveUrl={rail.liveUrl}
+              cover={cover}
+            />
+          }
+          beats={beats}
+        />
       </div>
     </article>
   );

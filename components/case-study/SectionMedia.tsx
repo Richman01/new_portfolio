@@ -3,7 +3,7 @@ import type { CaseStudySection } from "@/lib/types";
 
 export function SectionMedia({
   media,
-  variant = "standard",
+  variant,
 }: {
   media: CaseStudySection["media"];
   variant?: "standard" | "weighted" | "hero";
@@ -12,15 +12,9 @@ export function SectionMedia({
 
   if (Array.isArray(media)) {
     return (
-      <div
-        className={
-          variant === "weighted"
-            ? "mt-6 grid grid-cols-1 gap-4 sm:grid-cols-5"
-            : "mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2"
-        }
-      >
+      <div className="mt-10 flex flex-col gap-3 sm:mt-14 sm:gap-4">
         {media.map((item, i) => (
-          <div key={i} className={variant === "weighted" ? (i === 0 ? "sm:col-span-3" : "sm:col-span-2") : undefined}>
+          <div key={i}>
             <ScreenMoment item={item} frameless={variant === "hero"} />
           </div>
         ))}
@@ -29,7 +23,7 @@ export function SectionMedia({
   }
 
   return (
-    <div className="mt-6">
+    <div className="mt-10 sm:mt-14">
       <ScreenMoment item={media} frameless={variant === "hero"} />
     </div>
   );

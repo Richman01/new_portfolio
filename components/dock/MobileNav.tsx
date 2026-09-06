@@ -1,5 +1,6 @@
 "use client";
 
+import { Shuffle } from "lucide-react";
 import { PlaceholderBlock } from "@/components/shared/PlaceholderBlock";
 import { SocialBadge } from "@/components/shared/SocialBadge";
 import { projects } from "@/data/projects";
@@ -28,6 +29,7 @@ export function MobileNav() {
               src={project.icon}
               alt={`${project.title} logo`}
               label={project.title.slice(0, 2).toUpperCase()}
+              icon={project.slug === "randoms" ? <Shuffle size={22} className="text-white/90" /> : undefined}
               color={project.color}
             />
           </div>
